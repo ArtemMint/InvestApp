@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>WebStore — Dashboard</title>
+    <title>Магазин</title>
     <style>
       :root{
         --bg1: #f6fbff; /* very light blue */
@@ -67,9 +67,9 @@
     <div class="container">
       <header>
         <div class="brand">
-          <div class="logo">WS</div>
+          <div class="logo">3D</div>
           <div>
-            <h1>WebStore Dashboard</h1>
+            <h1>Магазин товарів</h1>
             <p class="lead">Керуйте своїми товарами.</p>
           </div>
         </div>
@@ -98,22 +98,22 @@
     <!-- modal -->
     <div class="overlay" id="overlay">
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <h2 id="modalTitle">Create new item</h2>
+        <h2 id="modalTitle">Додайте новий товар</h2>
         <div class="field">
-          <label for="title">Title</label>
-          <input id="title" name="title" type="text" placeholder="Item title" />
+          <label for="title">Назва</label>
+          <input id="title" name="title" type="text" placeholder="Назва товару" />
         </div>
         <div class="field">
-          <label for="description">Description</label>
-          <textarea id="description" name="description" rows="3" placeholder="Short description"></textarea>
+          <label for="description">Опис</label>
+          <textarea id="description" name="description" rows="3" placeholder="Короткий опис"></textarea>
         </div>
         <div class="field">
-          <label for="media_url">Media URL</label>
+          <label for="media_url">Посилання</label>
           <input id="media_url" name="media_url" type="text" placeholder="https://..." />
         </div>
         <div class="actions">
-          <button class="btn secondary" id="closeModal">Cancel</button>
-          <button class="btn" id="submitCreate">Create</button>
+          <button class="btn secondary" id="closeModal">Відмінити</button>
+          <button class="btn" id="submitCreate">Створити</button>
         </div>
       </div>
     </div>
