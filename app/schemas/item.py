@@ -11,7 +11,7 @@ class Item(ItemBase):
     id: int = Field(..., description="ID of the item item")
 
 class ItemCreate(ItemBase):
-    todo_id: int = Field(..., description="ID of the item item")
+    pass
 
 class ItemUpdate(ItemBase):
     title: Optional[str] = Field(None, max_length=100, min_length=1, description="Title of the item item")
