@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>WebStore Frontend</title>
+    <style>body{font-family:Arial,Helvetica,sans-serif;padding:1rem}label{display:block;margin-top:.5rem}input,textarea{width:100%;padding:.5rem;margin-top:.25rem}</style>
+  </head>
+  <body>
+    <h1>WebStore (Frontend)</h1>
+
+    <section>
+      <h2>Додати об'єкт</h2>
+      <form id="create-form">
+        <label>Назва<input name="title" required></label>
+        <label>Опис<textarea name="description"></textarea></label>
+        <label>Медіа URL<input name="media_url"></label>
+        <button type="submit">Створити</button>
+      </form>
+      <div id="create-result" style="margin-top:.5rem;color:green"></div>
+    </section>
+
+    <section>
+      <h2>Об'єкти</h2>
+      <div id="items">Завантаження...</div>
+    </section>
+
+    <script>
+      const apiBase = '/api/v1/items';
+
+      async function listItems(){
+        const res = await fetch(apiBase + '/');
+        if(!res.ok){
+          document.getElementById('items').textContent = 'Помилка при отриманні об\'єктів: ' + res.status;
+          return;
+        }
+        let data = await res.json();
+        if(!Array.isArray(data)) data = [];
+        const container = document.getElementById('items');
+        if(data.length === 0){
+          container.innerHTML = '<p>Об\'єктів ще немає.</p>';
+          return;
+        }
+        container.innerHTML = '';
+        data.forEach(it => {
+          const el = document.createElement('div');
+          el.style.border = '1px solid #ddd';
+          el.style.padding = '8px';
+          el.style.marginBottom = '8px';
+          el.innerHTML = '<strong>' + (it.title||'Без назви') + '</strong><p>' + (it.description||'') + '</p>' + (it.media_url?('<div><a href="'+it.media_url+'">Медіа</a></div>'):'');
+          container.appendChild(el);
+        });
+      }
+
+      document.getElementById('create-form').addEventListener('submit', async (e) =>{
+        e.preventDefault();
+        const form = e.target;
+        const payload = {
+          title: form.title.value,
+          description: form.description.value,
+          media_url: form.media_url.value || null
+        };
+        const res = await fetch(apiBase + '/', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+        const out = document.getElementById('create-result');
+        if(!res.ok){
+          out.style.color='red';
+          const err = await res.text();
+          out.textContent = 'Помилка: ' + res.status + ' ' + err;
+          return;
+        }
+        out.style.color='green';
+        out.textContent = 'Створено';
+        form.reset();
+        listItems();
+      });
+
+      listItems();
+    </script>
+  </body>
+</html>

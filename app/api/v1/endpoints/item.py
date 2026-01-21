@@ -1,39 +1,32 @@
-from fastapi import APIRouter, Depends, Request, Form
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from pathlib import Path
+from typing import List
+from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
+
 from app.db.session import get_db
 from app import crud
-from app.schemas.item import ItemCreate
+import app.models as models
+import app.schemas as schemas
 
 router = APIRouter()
-# Compute project root reliably using parents so this works from nested modules
-# For a file at app/api/v1/endpoints/item.py, parents[4] -> project root (/code)
-project_root = Path(__file__).resolve().parents[4]
-templates_dir = project_root / "frontend" / "templates"
-# Fallback: if frontend/templates doesn't exist, fall back to app/templates
-if not templates_dir.exists():
-    templates_dir = Path(__file__).resolve().parents[3] / "templates"
 
-templates = Jinja2Templates(directory=str(templates_dir))
-
-# Сторінка перегляду та форми
-@router.get("/ui", response_class=HTMLResponse)
-async def read_items_ui(request: Request, db: Session = Depends(get_db)):
+# JSON API: list items
+@router.get("/", response_model=List[schemas.Item], status_code=200)
+async def list_items_api(db: Session = Depends(get_db)):
     items = crud.item.get_items(db)
-    return templates.TemplateResponse("items.html", {"request": request, "items": items})
+    result = [
+        {"id": i.id, "title": i.title, "description": i.description, "media_url": i.media_url}
+        for i in items
+    ]
+    return JSONResponse(result)
 
-# Обробка форми (використовуємо Form замість JSON для звичайних HTML форм)
-@router.post("/ui")
-async def create_item_ui(
-    title: str = Form(...),
-    description: str = Form(None),
-    media_url: str = Form(None),
-    db: Session = Depends(get_db)
-):
-    item_in = ItemCreate(title=title, description=description, media_url=media_url)
-    crud.item.create_item(db=db, item_in=item_in)
-    # Після додавання повертаємо користувача на сторінку списку
-    from fastapi.responses import RedirectResponse
-    return RedirectResponse(url="/api/v1/items/ui", status_code=303)
+# JSON API: create item via JSON body
+@router.post("/", response_model=schemas.Item, status_code=201)
+async def create_item_api(payload: dict, db: Session = Depends(get_db)):
+    if "title" not in payload or "description" not in payload:
+        raise HTTPException(status_code=400, detail="title and description are required")
+    db_item = models.Item(**{k: v for k, v in payload.items() if k in ("title", "description", "media_url")})
+    db.add(db_item)
+    db.commit()
+    db.refresh(db_item)
+    return JSONResponse({"id": db_item.id, "title": db_item.title, "description": db_item.description, "media_url": db_item.media_url})

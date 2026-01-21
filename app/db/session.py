@@ -36,7 +36,7 @@ if engine is None:
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Зависимость (Dependency Injection) для роутеров
+# Dependency to get DB session
 def get_db():
     db = SessionLocal()
     try:
