@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f855960b-6526-4524-9829-ecb0b06f7826" name="Changes" comment="First commit">
-      <change afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+    <list default="true" id="f855960b-6526-4524-9829-ecb0b06f7826" name="Changes" comment="Deleted backend interface render">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/db/session.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/db/session.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/items.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/items.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/items.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,12 +117,39 @@
       <option name="project" value="LOCAL" />
       <updated>1769014822841</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Use only frontend as interface. Updated docs">
+      <option name="closed" value="true" />
+      <created>1769019780811</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1769019780811</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fixed schemas Item.">
+      <option name="closed" value="true" />
+      <created>1769021116049</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1769021116049</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Deleted backend interface render">
+      <option name="closed" value="true" />
+      <created>1769021183082</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1769021183082</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
+    <MESSAGE value="Use only frontend as interface. Updated docs" />
+    <MESSAGE value="Fixed schemas Item." />
+    <MESSAGE value="Deleted backend interface render" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted backend interface render" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

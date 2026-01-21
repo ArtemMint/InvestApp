@@ -1,79 +1,246 @@
 <!doctype html>
-<html>
+<html lang="uk">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>WebStore Frontend</title>
-    <style>body{font-family:Arial,Helvetica,sans-serif;padding:1rem}label{display:block;margin-top:.5rem}input,textarea{width:100%;padding:.5rem;margin-top:.25rem}</style>
+    <title>WebStore — Dashboard</title>
+    <style>
+      :root{
+        --bg1: #f6fbff; /* very light blue */
+        --bg2: #f3fff9; /* very light mint */
+        --card: #ffffff;
+        --muted: #6b7280;
+        --accent: #6ee7b7; /* pastel green */
+        --accent-2: #93c5fd; /* pastel blue */
+        --glass: rgba(255,255,255,0.7);
+        --shadow: 0 6px 18px rgba(16,24,40,0.08);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+
+      html,body{height:100%;margin:0;background:linear-gradient(135deg,var(--bg1) 0%, var(--bg2) 100%);color:#0f172a}
+      .container{max-width:1200px;margin:32px auto;padding:24px}
+
+      header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+      .brand{display:flex;align-items:center;gap:12px}
+      .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent));box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+      h1{font-size:1.4rem;margin:0}
+      p.lead{margin:0;color:var(--muted);font-size:0.95rem}
+
+      .controls{display:flex;gap:12px;align-items:center}
+      .btn{background:linear-gradient(180deg,var(--accent),var(--accent-2));border:none;padding:10px 14px;border-radius:10px;color:#04202b;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(99,102,241,0.08)}
+      .btn.secondary{background:transparent;border:1px solid rgba(16,24,40,0.06);color:var(--muted);font-weight:600}
+      .btn.danger{background:linear-gradient(180deg,#ffd6d6,#ffb3b3);border:none;padding:8px 10px;border-radius:8px;color:#6b0505;font-weight:700;cursor:pointer}
+
+      .grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:18px}
+      .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:var(--shadow);min-height:120px;display:flex;flex-direction:column}
+      .card h3{margin:0;font-size:1rem}
+      .card p{margin:8px 0 0 0;color:var(--muted);font-size:0.95rem}
+      .media{margin-top:10px;border-radius:8px;overflow:hidden;background:#f8fafc}
+      .media img, .media video{width:100%;height:120px;object-fit:cover;display:block}
+      .card .card-actions{margin-top:auto;display:flex;justify-content:flex-end;gap:8px}
+
+      /* Create modal styles */
+      .overlay{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:none;align-items:center;justify-content:center;padding:20px}
+      .overlay.open{display:flex}
+      .modal{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));backdrop-filter:blur(6px);border-radius:14px;padding:20px;width:100%;max-width:520px;box-shadow:0 25px 50px rgba(2,6,23,0.18)}
+      .modal h2{margin:0 0 8px 0}
+      .field{margin-bottom:12px}
+      .field label{display:block;font-size:0.9rem;color:var(--muted);margin-bottom:6px}
+      .field input[type=text], .field textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:var(--glass)}
+      .modal .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+
+      /* responsive */
+      @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+      @media (max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:520px){.grid{grid-template-columns:repeat(1,1fr)}; header{flex-direction:column;align-items:flex-start;gap:12px}}
+
+      /* small helper */
+      .empty{padding:32px;text-align:center;color:var(--muted);background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));border-radius:10px}
+
+      /* floating create button for quick access */
+      .fab{position:fixed;right:20px;bottom:20px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:999px;padding:14px 16px;color:#04202b;box-shadow:0 14px 32px rgba(99,102,241,0.12);cursor:pointer;border:none}
+
+      footer{margin-top:28px;color:var(--muted);font-size:0.9rem;text-align:center}
+    </style>
   </head>
   <body>
-    <h1>WebStore (Frontend)</h1>
+    <div class="container">
+      <header>
+        <div class="brand">
+          <div class="logo">WS</div>
+          <div>
+            <h1>WebStore Dashboard</h1>
+            <p class="lead">Керуйте своїми товарами.</p>
+          </div>
+        </div>
 
-    <section>
-      <h2>Додати об'єкт</h2>
-      <form id="create-form">
-        <label>Назва<input name="title" required></label>
-        <label>Опис<textarea name="description"></textarea></label>
-        <label>Медіа URL<input name="media_url"></label>
-        <button type="submit">Створити</button>
-      </form>
-      <div id="create-result" style="margin-top:.5rem;color:green"></div>
-    </section>
+        <div class="controls">
+          <button class="btn secondary" id="refreshBtn">Оновити</button>
+          <button class="btn" id="openCreate">Додати товар</button>
+        </div>
+      </header>
 
-    <section>
-      <h2>Об'єкти</h2>
-      <div id="items">Завантаження...</div>
-    </section>
+      <main>
+        <section id="itemsSection">
+          <div id="itemsGrid" class="grid">
+            <!-- Cards injected here -->
+          </div>
+          <div id="emptyState" class="empty" style="display:none">Список порожній. Додайте свій перший товар!</div>
+        </section>
+
+        <footer>Powered by FastAPI & Nginx • Light UI</footer>
+      </main>
+    </div>
+
+    <!-- floating action button -->
+    <button class="fab" id="fabCreate" aria-label="Create item">＋</button>
+
+    <!-- modal -->
+    <div class="overlay" id="overlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <h2 id="modalTitle">Create new item</h2>
+        <div class="field">
+          <label for="title">Title</label>
+          <input id="title" name="title" type="text" placeholder="Item title" />
+        </div>
+        <div class="field">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="3" placeholder="Short description"></textarea>
+        </div>
+        <div class="field">
+          <label for="media_url">Media URL</label>
+          <input id="media_url" name="media_url" type="text" placeholder="https://..." />
+        </div>
+        <div class="actions">
+          <button class="btn secondary" id="closeModal">Cancel</button>
+          <button class="btn" id="submitCreate">Create</button>
+        </div>
+      </div>
+    </div>
 
     <script>
       const apiBase = '/api/v1/items';
 
+      // UI helpers
+      const overlay = document.getElementById('overlay');
+      const openCreate = document.getElementById('openCreate');
+      const fabCreate = document.getElementById('fabCreate');
+      const closeModal = document.getElementById('closeModal');
+      const submitCreate = document.getElementById('submitCreate');
+      const refreshBtn = document.getElementById('refreshBtn');
+
+      function openModal(){overlay.classList.add('open')}
+      function closeModalFn(){overlay.classList.remove('open')}
+
+      openCreate.addEventListener('click', openModal);
+      fabCreate.addEventListener('click', openModal);
+      closeModal.addEventListener('click', closeModalFn);
+      overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModalFn(); });
+
+      refreshBtn.addEventListener('click', listItems);
+
       async function listItems(){
-        const res = await fetch(apiBase + '/');
-        if(!res.ok){
-          document.getElementById('items').textContent = 'Помилка при отриманні об\'єктів: ' + res.status;
-          return;
-        }
-        let data = await res.json();
-        if(!Array.isArray(data)) data = [];
-        const container = document.getElementById('items');
-        if(data.length === 0){
-          container.innerHTML = '<p>Об\'єктів ще немає.</p>';
-          return;
-        }
-        container.innerHTML = '';
-        data.forEach(it => {
-          const el = document.createElement('div');
-          el.style.border = '1px solid #ddd';
-          el.style.padding = '8px';
-          el.style.marginBottom = '8px';
-          el.innerHTML = '<strong>' + (it.title||'Без назви') + '</strong><p>' + (it.description||'') + '</p>' + (it.media_url?('<div><a href="'+it.media_url+'">Медіа</a></div>'):'');
-          container.appendChild(el);
-        });
+        const grid = document.getElementById('itemsGrid');
+        const empty = document.getElementById('emptyState');
+        grid.innerHTML = 'Loading...';
+        try{
+          const res = await fetch(apiBase + '/');
+          if(!res.ok){ grid.innerHTML=''; empty.style.display='block'; empty.textContent='Error fetching items: '+res.status; return; }
+          const data = await res.json();
+          grid.innerHTML = '';
+          if(!Array.isArray(data) || data.length===0){ empty.style.display='block'; return; } else { empty.style.display='none'; }
+
+          data.forEach(it => {
+            const card = document.createElement('article');
+            card.className = 'card';
+
+            const h = document.createElement('h3'); h.textContent = it.title || 'Без назви';
+            const p = document.createElement('p'); p.textContent = it.description || '';
+            card.appendChild(h); card.appendChild(p);
+
+            if(it.media_url){
+              const m = document.createElement('div'); m.className='media';
+              if(it.media_url.endsWith('.mp4')){
+                const v = document.createElement('video'); v.src = it.media_url; v.controls = true; m.appendChild(v);
+              } else {
+                const img = document.createElement('img'); img.src = it.media_url; img.alt = it.title || '';
+                m.appendChild(img);
+              }
+              card.appendChild(m);
+            }
+
+            // Create actions container
+            const actions = document.createElement('div');
+            actions.className = 'card-actions';
+
+            // Create delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'btn danger';
+            deleteBtn.textContent = 'Видалити';
+            deleteBtn.setAttribute('aria-label', 'Видалити елемент');
+            deleteBtn.onclick = async () => {
+              if(!confirm('Ви впевнені, що хочете видалити цей елемент?')) return;
+              deleteBtn.disabled = true;
+              try{
+                const res = await fetch(apiBase + '/' + it.id, {method:'DELETE'});
+                if(!res.ok){
+                  alert('Не вдалося видалити: ' + res.status);
+                } else {
+                  listItems();
+                }
+              }catch(err){
+                console.error(err);
+                alert('Помилка видалення');
+              } finally {
+                deleteBtn.disabled = false;
+              }
+            };
+            actions.appendChild(deleteBtn);
+
+            card.appendChild(actions);
+            grid.appendChild(card);
+          });
+        }catch(err){ grid.innerHTML=''; empty.style.display='block'; empty.textContent='Fetch error'; }
       }
 
-      document.getElementById('create-form').addEventListener('submit', async (e) =>{
-        e.preventDefault();
-        const form = e.target;
-        const payload = {
-          title: form.title.value,
-          description: form.description.value,
-          media_url: form.media_url.value || null
-        };
+      async function createItem({title, description, media_url}){
+        const payload = { title, description, media_url };
         const res = await fetch(apiBase + '/', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
-        const out = document.getElementById('create-result');
         if(!res.ok){
-          out.style.color='red';
-          const err = await res.text();
-          out.textContent = 'Помилка: ' + res.status + ' ' + err;
-          return;
+          const txt = await res.text().catch(()=>res.statusText);
+          alert('Create failed: '+res.status+' '+txt);
+          return false;
         }
-        out.style.color='green';
-        out.textContent = 'Створено';
-        form.reset();
-        listItems();
+        return true;
+      }
+
+      submitCreate.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        const title = document.getElementById('title').value.trim();
+        const description = document.getElementById('description').value.trim();
+        const media_url = document.getElementById('media_url').value.trim() || null;
+
+        if(!title){ alert('Please provide a title'); return; }
+        if(!description){ alert('Please provide a description'); return; }
+
+        // prevent double submissions
+        submitCreate.disabled = true;
+        try {
+          const ok = await createItem({title, description, media_url});
+          if(ok){
+            // reset form
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('media_url').value = '';
+            closeModalFn();
+            listItems();
+          }
+        } finally {
+          submitCreate.disabled = false;
+        }
       });
 
+      // initial load
       listItems();
     </script>
   </body>
