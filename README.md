@@ -15,7 +15,7 @@ Quick start:
 1. Copy the example environment file and adjust secrets if needed:
 
 ```bash
-cp .env.example .env
+cp .env.test .env
 ```
 
 2. Build and start the stack:
