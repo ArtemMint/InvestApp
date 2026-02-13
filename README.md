@@ -1,6 +1,6 @@
-# WebStore
+# InvestApp
 
-Minimal FastAPI WebStore application.
+Minimal FastAPI InvestApp application.
 
 ## Docker Compose
 

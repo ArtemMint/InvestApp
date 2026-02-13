@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: webstore_backend
+    container_name: investapp_backend
     env_file:
       - .env.test
     depends_on:
@@ -16,7 +16,7 @@ services:
 
   frontend:
     image: nginx:stable-alpine
-    container_name: webstore_frontend
+    container_name: investapp_frontend
     volumes:
       - ./frontend:/usr/share/nginx/html:ro
       - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
@@ -26,7 +26,7 @@ services:
 
   postgres:
     image: postgres:15
-    container_name: webstore_postgres
+    container_name: investapp_postgres
     env_file:
       - .env.test
     volumes:

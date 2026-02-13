@@ -1,3 +1,5 @@
+import os
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List, Optional
 
@@ -15,12 +17,13 @@ class Settings(BaseSettings):
     SQLITE_URL: str = "sqlite:///./sql_app.db"
 
     # Postgres / Docker settings (can be provided via .env or docker-compose)
-    POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "postgres"
-    POSTGRES_DB: str = "webstore"
-    POSTGRES_HOST: str = "localhost"
-    POSTGRES_PORT: int = 5432
-    DATABASE_URL: Optional[str] = None
+    POSTGRES_USER: str = os.getenv("POSTGRES_USER")
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_DB: str = os.getenv("POSTGRES_DB")
+    POSTGRES_HOST: str = os.getenv("POSTGRES_HOST")
+    POSTGRES_PORT: int = os.getenv("POSTGRES_PORT")
+    DATABASE_URL: Optional[str] = os.getenv("DATABASE_URL",
+                                            "postgresql://postgres:postgres@localhost:5432/invest_db")
 
     # Налаштування завантаження з файлу .env
     model_config = SettingsConfigDict(
