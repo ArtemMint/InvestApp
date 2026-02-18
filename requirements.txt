@@ -1,0 +1,8 @@
+fastapi[standard]==0.128.0
+pydantic==2.12.5
+pydantic-settings
+SQLAlchemy==2.0.45
+psycopg2-binary==2.9.10
+python-dotenv
+yfinance==1.2.0
+# add requests for making HTTP requests to the OpenAI API

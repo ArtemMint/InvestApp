@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from pathlib import Path
 
 from .api.v1.api import api_router
@@ -48,3 +48,13 @@ app = get_application()
 @app.get("/health")
 async def health():
     return JSONResponse({"status": "ok", "message": "API is running"})
+
+# Serve the stock chart page
+@app.get("/")
+async def read_index():
+    return FileResponse(project_root / "frontend" / "stock.html")
+
+# Serve the main index.html
+@app.get("/item")
+async def read_item():
+    return FileResponse(project_root / "frontend" / "index.html")
