@@ -1,6 +1,34 @@
 # InvestApp
 
-Minimal FastAPI InvestApp application.
+Minimal FastAPI InvestApp application with real-time stock chart visualization.
+
+## Features
+
+- 📊 **Item Management** - CRUD operations for items
+- 📈 **Stock Chart** - Interactive candlestick charts with real-time stock data
+- 🔐 **User Management** - User authentication and management
+- 🗄️ **PostgreSQL Database** - Persistent data storage
+- 🐳 **Docker Support** - Easy deployment with Docker Compose
+
+## Stock Chart Feature
+
+The application includes a powerful stock chart visualization tool:
+
+- **Interactive candlestick charts** using Lightweight Charts
+- **Real-time data** from Yahoo Finance API
+- **Multiple timeframes** (1 minute to 1 week intervals)
+- **Volume histogram** with color-coded bars
+- **Statistics dashboard** showing price, change, high, low, and volume
+
+### Quick Start for Stock Charts
+
+```bash
+# Start the development server
+uvicorn app.main:app --reload
+
+# Access the stock chart
+http://localhost:8000/stock.html
+```
 
 ## Docker Compose
 
