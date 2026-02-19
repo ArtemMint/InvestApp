@@ -49,12 +49,22 @@ app = get_application()
 async def health():
     return JSONResponse({"status": "ok", "message": "API is running"})
 
-# Serve the stock chart page
+# Serve the main index.html
 @app.get("/")
 async def read_index():
+    return FileResponse(project_root / "frontend" / "index.html")
+
+# Serve the stock.html at /stock
+@app.get("/")
+async def read_stock():
     return FileResponse(project_root / "frontend" / "stock.html")
 
-# Serve the main index.html
+# Serve the invest_planing.html
+@app.get("/financial_goals/invest_planing")
+async def read_invest_planing():
+    return FileResponse(project_root / "frontend" / "invest_planing.html")
+
+# Serve the items.html
 @app.get("/item")
 async def read_item():
-    return FileResponse(project_root / "frontend" / "index.html")
+    return FileResponse(project_root / "frontend" / "items.html")

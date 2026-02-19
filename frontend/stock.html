@@ -239,6 +239,60 @@
         margin:0 auto;
       }
 
+      /* Navigation */
+      nav{
+        background: var(--card);
+        border-radius: 12px;
+        padding: 16px 24px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-brand{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-right: auto;
+      }
+
+      .nav-logo{
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: linear-gradient(135deg,var(--accent-2),var(--accent));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        text-decoration: none;
+      }
+
+      .nav-link{
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #0f172a;
+        font-weight: 600;
+        transition: all 0.2s;
+        border: 2px solid transparent;
+      }
+
+      .nav-link:hover{
+        background: rgba(110, 231, 183, 0.1);
+        border-color: var(--accent);
+      }
+
+      .nav-link.active{
+        background: linear-gradient(180deg,var(--accent),var(--accent-2));
+        color: #04202b;
+      }
+
       @media (max-width:768px){
         .controls{
           width:100%;
@@ -254,6 +308,16 @@
   </head>
   <body>
     <div class="container">
+      <!-- Navigation -->
+      <nav>
+        <div class="nav-brand">
+          <a class="nav-logo" href="index.html">💰</a>
+          InvestApp
+        </div>
+        <a href="stock.html" class="nav-link active">📈 Акції</a>
+        <a href="investment.html" class="nav-link">💹 Інвестиційний Калькулятор</a>
+      </nav>
+
       <header>
         <div class="brand">
           <div class="logo">📈</div>
