@@ -1,4 +1,5 @@
 import pytest
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -7,7 +8,11 @@ from app.db.session import get_db
 from app.db.base_class import Base
 from fastapi.testclient import TestClient
 
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/postgres"
+# Use environment variable if available, otherwise use default test database URL
+SQLALCHEMY_DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql://postgres:postgres@localhost:5432/postgres"
+)
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
