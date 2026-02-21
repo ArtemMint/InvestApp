@@ -73,12 +73,4 @@ jobs:
       env:
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
       run: |
-        pytest tests/ -v --tb=short --cov=app --cov-report=term-missing --junitxml=pytest.xml --cov-report=xml --cov-fail-under=80 | tee pytest-coverage.txt
-
-    - name: Pytest coverage comment
-      if: always() && github.event_name == 'pull_request'
-      uses: MishaKav/pytest-coverage-commenter@main
-      with:
-        pytest-coverage-common-log: ./pytest-coverage.txt
-        pytest-xml-coverage-path: ./coverage.xml
-        junitxml-path: ./pytest.xml
+        pytest tests/ -v --tb=short --cov=app --cov-report=term-missing --junitxml=pytest.xml --cov-report=xml --cov-fail-under=80
