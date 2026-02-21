@@ -17,11 +17,11 @@ class Settings(BaseSettings):
     SQLITE_URL: str = "sqlite:///./sql_app.db"
 
     # Postgres / Docker settings (can be provided via .env or docker-compose)
-    POSTGRES_USER: str = os.getenv("POSTGRES_USER")
-    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
-    POSTGRES_DB: str = os.getenv("POSTGRES_DB")
-    POSTGRES_HOST: str = os.getenv("POSTGRES_HOST")
-    POSTGRES_PORT: int = os.getenv("POSTGRES_PORT")
+    POSTGRES_USER: str = os.getenv("POSTGRES_USER", "postgres")
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "postgres")
+    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "invest_db")
+    POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "localhost")
+    POSTGRES_PORT: int = os.getenv("POSTGRES_PORT", 5432)
     DATABASE_URL: Optional[str] = os.getenv("DATABASE_URL",
                                             "postgresql://postgres:postgres@localhost:5432/invest_db")
 
