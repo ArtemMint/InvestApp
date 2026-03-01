@@ -5,18 +5,14 @@ from typing import List, Optional
 
 
 class Settings(BaseSettings):
-    # Налаштування за замовчуванням (можуть бути перевизначені в .env)
     PROJECT_NAME: str = "FastAPI App 2026"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
 
-    # Список дозволених доменів для CORS
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
 
-    # Параметри бази даних
     SQLITE_URL: str = "sqlite:///./sql_app.db"
 
-    # Postgres / Docker settings (can be provided via .env or docker-compose)
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "postgres")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "postgres")
     POSTGRES_DB: str = os.getenv("POSTGRES_DB", "invest_db")
@@ -25,11 +21,11 @@ class Settings(BaseSettings):
     DATABASE_URL: Optional[str] = os.getenv("DATABASE_URL",
                                             "postgresql://postgres:postgres@localhost:5432/invest_db")
 
-    # Налаштування завантаження з файлу .env
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        case_sensitive=True  # Змінні в .env мають бути великими літерами
+        case_sensitive=True,
+        extra="ignore",
     )
 
     @property
@@ -52,5 +48,4 @@ class Settings(BaseSettings):
         return self.SQLITE_URL
 
 
-# Створюємо один екземпляр для всього додатку
 settings = Settings()
