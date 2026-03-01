@@ -1,5 +1,5 @@
 import time
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 
@@ -22,7 +22,7 @@ for attempt in range(1, 11):
 
         # Try a quick test connection
         with engine.connect() as conn:
-            conn.execute("SELECT 1")
+            conn.execute(text("SELECT 1"))
         last_err = None
         break
     except Exception as e:
