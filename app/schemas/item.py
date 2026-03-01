@@ -20,7 +20,7 @@ class ItemCreate(ItemBase):
     pass
 
 class ItemUpdate(ItemBase):
-    id: int = Field(..., description="ID of the item")
+    id: Optional[int] = Field(..., description="ID of the item")
     title: Optional[str] = Field(None, max_length=100, min_length=1, description="Title of the item")
     description: Optional[str] = Field(None, max_length=300, min_length=1, description="Description of the item")
     media_url: Optional[str] = Field(None, max_length=500, description="Optional media_url associated with the item")
