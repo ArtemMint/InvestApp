@@ -72,7 +72,7 @@ class TestItemAPI:
         assert body["media_url"] == media_url
 
     def test_update_item_by_id_returns_400(self, client, persisted_item):
-        """Updating an existing item without id should return 400."""
+        """Updating an existing item with a null id should return 400."""
         payload = {
             "id": None,
             "title": "Updated Title",
