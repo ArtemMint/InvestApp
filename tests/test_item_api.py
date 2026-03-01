@@ -1,5 +1,3 @@
-from datetime import datetime
-
 ITEM_API = "/api/v1/items"
 
 
@@ -21,7 +19,7 @@ class TestItemAPI:
         assert body["description"] == persisted_item.description
         assert body["media_url"] == persisted_item.media_url
 
-    def test_get_item_by_id_returns_404(self, client, persisted_item):
+    def test_get_item_by_id_returns_404(self, client):
         """Getting non-existing item by ID should return 404."""
         response = client.get(f"{ITEM_API}/999")
         assert response.status_code == 404
@@ -65,7 +63,7 @@ class TestItemAPI:
             "media_url": media_url,
             "id": id
         }
-        response = client.put(f"{ITEM_API}", json=payload)
+        response = client.put(f"{ITEM_API}/", json=payload)
         assert response.status_code == 200
         body = response.json()
         assert body["id"] == id
@@ -74,7 +72,7 @@ class TestItemAPI:
         assert body["media_url"] == media_url
 
     def test_update_item_by_id_returns_400(self, client, persisted_item):
-        """Updating an existing item should return 400 with the updated item body."""
+        """Updating an existing item with a null id should return 400."""
         payload = {
             "id": None,
             "title": "Updated Title",
@@ -85,9 +83,9 @@ class TestItemAPI:
         assert response.json()["detail"] == "id is required for update"
 
     def test_update_item_by_id_returns_404(self, client, persisted_item):
-        """Updating an existing item should return 200 with the updated item body."""
+        """Updating a non-existing item should return 404."""
         payload = {
-            "id": 4,
+            "id": persisted_item.id + 500,
             "title": "Updated Title",
             "description": "Updated description"
         }
@@ -99,7 +97,7 @@ class TestItemAPI:
         """Deleting an existing item should return 204 with no content."""
         response = client.delete(f"{ITEM_API}/{persisted_item.id}")
         assert response.status_code == 204
-        assert response.content == b'null'
+        assert response.content == b"null"
 
     def test_delete_item_by_id_returns_404(self, client, persisted_item):
         """Deleting an existing item should return 204 with no content."""

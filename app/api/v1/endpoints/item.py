@@ -29,7 +29,7 @@ async def get_item_api(item_id: int, db: Session = Depends(get_db)):
 @router.post("/", response_model=schemas.Item, status_code=201)
 async def create_item_api(payload: schemas.ItemCreate, db: Session = Depends(get_db)):
     if payload.title is None or payload.description is None:
-        raise HTTPException(status_code=400, detail="title and description are required")
+        raise HTTPException(status_code=422, detail="title and description are required")
     db_item = crud.item.create_item(db, item_in=payload)
     return schemas.Item.model_validate(db_item)
 
@@ -51,4 +51,4 @@ async def delete_item_api(item_id: int, db: Session = Depends(get_db)):
     if not db_item:
         raise HTTPException(status_code=404, detail="Item not found")
     crud.item.delete_item(db, item_id=item_id)
-    return JSONResponse(status_code=204)
+    return JSONResponse(status_code=204, content=None)
