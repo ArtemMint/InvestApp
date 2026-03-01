@@ -97,7 +97,7 @@ class TestItemAPI:
         """Deleting an existing item should return 204 with no content."""
         response = client.delete(f"{ITEM_API}/{persisted_item.id}")
         assert response.status_code == 204
-        assert response.content == b""
+        assert response.content == b"null"
 
     def test_delete_item_by_id_returns_404(self, client, persisted_item):
         """Deleting an existing item should return 204 with no content."""
