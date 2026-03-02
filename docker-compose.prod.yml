@@ -21,7 +21,7 @@ services:
     container_name: investapp_frontend
     volumes:
       - ./frontend:/usr/share/nginx/html:ro
-      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
       - certbot_www:/var/www/certbot:ro
       - certbot_conf:/etc/letsencrypt:ro
     ports:

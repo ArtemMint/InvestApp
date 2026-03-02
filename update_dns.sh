@@ -1,6 +1,11 @@
 #!/bin/bash
 
-source "$(dirname "$0")/.env"
+ENV_FILE="/home/ubuntu/InvestApp/.env"
+if [[ ! -f "$ENV_FILE" ]]; then
+    echo "Error: .env file not found at $ENV_FILE"
+    exit 1
+fi
+source "$ENV_FILE"
 
 # 1. Get the current public IP address of the server
 TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
