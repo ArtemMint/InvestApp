@@ -55,14 +55,14 @@ async def read_index():
     return FileResponse(project_root / "frontend" / "index.html")
 
 # Serve the stock.html at /stock
-@app.get("/")
+@app.get("/stock")
 async def read_stock():
     return FileResponse(project_root / "frontend" / "stock.html")
 
-# Serve the invest_planing.html
-@app.get("/financial_goals/invest_planing")
-async def read_invest_planing():
-    return FileResponse(project_root / "frontend" / "invest_planing.html")
+# Serve the investment_calc.html
+@app.get("/investment_calc")
+async def read_investment_calc():
+    return FileResponse(project_root / "frontend" / "investment_calc.html")
 
 # Serve the items.html
 @app.get("/item")
