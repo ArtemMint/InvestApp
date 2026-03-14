@@ -79,7 +79,7 @@ class TestGetStockData:
         body = response.json()
         point = body["data"][0]
 
-        expected_keys = {"time", "open", "high", "low", "close", "volume"}
+        expected_keys = {"time", "open", "high", "low", "close", "volume", "ma200", "ma50", "ma20", "ma9"}
         assert expected_keys == set(point.keys())
         assert isinstance(point["open"], float)
         assert isinstance(point["volume"], int)
