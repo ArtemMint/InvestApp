@@ -1,3 +1,5 @@
+import numpy as np
+import pandas as pd
 import yfinance as yf
 from fastapi import APIRouter, Query
 from app.utils.helpers import log_request
@@ -12,28 +14,73 @@ async def get_stock_data(
     interval: str = Query(default="1h", description="Data interval (1m, 5m, 15m, 1h, 1d, etc.)")
 ):
     """
-    Get stock data with OHLCV (Open, High, Low, Close, Volume) for candlestick charts
-    :return
+    Get stock data with OHLCV (Open, High, Low, Close, Volume, MA200, MA50, MA20, MA9)
+    for a given stock ticker, period, and interval.
+    :param stock_ticker: For example: GOOG
+    :param period: Data period (1d, 5d, 1mo, 3mo, 6mo, 1y, etc.)
+    :param interval: Data interval (1m, 5m, 15m, 1h, 1d, etc.)
 
+    :return
+        {
+        "ticker": "GOOG",
+        "period": "3mo",
+        "interval": "1h",
+        "data": [
+            {
+                "time": "2025-01-01T00:00:00Z",
+                "open": 100.0,
+                "high": 110.0,
+                "low": 90.0,
+                "close": 105.0,
+                "volume": 1000000,
+                "ma200": 102.5,
+                "ma50": 104.0,
+                "ma20": 103.0,
+                "ma9": 105.0
+            },
+            ...
+        ]
+        }
     """
     try:
-        # Download stock data
+        # Download stock data using yfinance
         data = yf.download(stock_ticker, period=period, interval=interval, progress=False)
 
         if data.empty:
             return {"error": "No data found for the given ticker", "data": []}
 
-        # Convert to list of candlestick data
-        candlesticks = []
-        for timestamp, row in data.iterrows():
-            candlesticks.append({
-                "time": timestamp.isoformat(),
-                "open": float(row['Open']),
-                "high": float(row['High']),
-                "low": float(row['Low']),
-                "close": float(row['Close']),
-                "volume": int(row['Volume'])
-            })
+        # If the columns are a MultiIndex (which can happen with some yfinance data), we need to flatten it
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = data.columns.droplevel(1)
+
+        # Compute moving averages
+        close_data = data["Close"]
+        data["ma200"] = close_data.rolling(window=200).mean()
+        data["ma50"] = close_data.rolling(window=50).mean()
+        data["ma20"] = close_data.rolling(window=20).mean()
+        data["ma9"] = close_data.rolling(window=9).mean()
+
+        # Renaming columns to match the expected output format
+        data = data.rename(columns={
+            "Open": "open",
+            "High": "high",
+            "Low": "low",
+            "Close": "close",
+            "Volume": "volume"
+        })
+
+        # Add time column from index
+        data["time"] = data.index.map(lambda x: x.isoformat())
+
+        # Take only the necessary columns and ensure they are in the correct order
+        cols = ["time", "open", "high", "low", "close", "volume", "ma200", "ma50", "ma20", "ma9"]
+        data = data[cols]
+
+        # Check for NaN values and replace them with None for JSON serialization
+        data = data.replace({np.nan: None})
+
+        # Convert DataFrame to list of dictionaries for JSON response
+        candlesticks = data.to_dict(orient="records")
 
         return {
             "ticker": stock_ticker,
