@@ -1,25 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f855960b-6526-4524-9829-ecb0b06f7826" name="Changes" comment="Small fixes in the interface and schemas">
+    <list default="true" id="f855960b-6526-4524-9829-ecb0b06f7826" name="Changes" comment="Add stock data visualization with moving averages; create CSS and JS files for styling and functionality">
+      <change afterPath="$PROJECT_DIR$/app/core/auth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/core/security.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/crud/user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/asset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/portfolio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/positions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/transaction.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/models/user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.test.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_item_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/schemas/asset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/schemas/portfolio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/schemas/token.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/script/auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/script/investement_calc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/script/portfolio.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/style/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/style/investement_calc.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/style/portfolio.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_user_api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/financial_goals.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/financial_goals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/portfolio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/stock.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/crud/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crud/item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/item.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/crud/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crud/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/crud/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crud/portfolio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/db/base_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/db/base_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/item.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/item.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/schemas/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.prod.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crud/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/investment_calc.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/investment_calc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/items.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/portfolio.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/stock.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/script/stock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/nginx.prod.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.prod.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/stock.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/stock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/style/stock.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/style/stock.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_fast_api_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_fast_api_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_financial_goals_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_financial_goals_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_item_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_item_api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,40 +63,86 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
+      <entry key="_/home/artem/PycharmProjects/InvestApp" value="39tYax5c1hLAkPmnRiGbbb6JiAV" />
       <entry key="_/home/artem/PycharmProjects/WebStore" value="38RThh7QYu6xmZNU36vjOXafot4" />
     </persistenceIdMap>
   </component>
+  <component name="CopilotUserSelectedChatMode">
+    <option name="chatModeId" value="Agent" />
+  </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="chat-panel" value="Claude Sonnet 4.5" />
-      <entry key="agent-panel" value="Claude Sonnet 4.5" />
-      <entry key="inline" value="GPT-5 mini" />
+      <entry key="inline" value="Claude Sonnet 4.6" />
       <entry key="edit-panel" value="GPT-5 mini" />
+      <entry key="chat-panel" value="GPT-5 mini" />
+      <entry key="agent-panel" value="GPT-5 mini" />
     </selectedModels>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;state&quot;: &quot;OPEN&quot;
+    }
+  ],
   &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;artemyurchak&quot;
+    &quot;state&quot;: &quot;OPEN&quot;
   }
 }</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOQ-bxls7FVP8N&quot;,
+        &quot;number&quot;: 4
+      },
+      &quot;lastSeen&quot;: 1771672304456
+    }
+  ]
+}</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="223bf37f-278b-45de-ade4-167a072c740d" />
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ArtemMint/WebStore.git&quot;,
     &quot;accountId&quot;: &quot;223bf37f-278b-45de-ade4-167a072c740d&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;ArtemMint&quot;,
+    &quot;repository&quot;: &quot;WebStore&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/api/v1/endpoints/financial_goals.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -80,57 +161,134 @@
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.executor": "Run",
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_data_structure.executor": "Run",
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_get_item.executor": "Run",
+    "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_get_item_by_id_returns_200.executor": "Run",
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_item_create.executor": "Run",
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_item_update.executor": "Run",
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_status_code.executor": "Run",
+    "Python.49_group_anagrams.executor": "Run",
+    "Python.HASH.executor": "Run",
+    "Python.QUESTS.executor": "Run",
+    "Python.add_two_numbers.executor": "Debug",
+    "Python.aws_db.executor": "Run",
+    "Python.dynamodb_example.executor": "Run",
+    "Python.int_polindrom.executor": "Debug",
+    "Python.invest_calc.executor": "Run",
+    "Python.longest_common_prefix.executor": "Debug",
+    "Python.test_item_api.executor": "Run",
+    "Python.two_sum.executor": "Run",
+    "Python.websockets.executor": "Run",
+    "Python.websockets_test.executor": "Run",
+    "Python.yfinance_example.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/artem/XperiProjects/dms_client",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHELLCHECK.PATH": "/home/artem/.local/share/JetBrains/PyCharm2025.3/Shell Script/shellcheck",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "git-widget-placeholder": "users-and-portfolio-feature",
+    "last_opened_file_path": "/home/artem/XperiProjects/vision_tester",
+    "list.type.of.created.stylesheet": "CSS",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/frontend/templates" />
       <recent name="$PROJECT_DIR$/frontend" />
-      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$/frontend/template" />
+      <recent name="$PROJECT_DIR$/frontend/js" />
+      <recent name="$PROJECT_DIR$/tasks" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_status_code">
+  <component name="RunManager" selected="Python.yfinance_example">
+    <configuration name="QUESTS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="InvestApp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tasks" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tasks/QUESTS.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="websockets_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="InvestApp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/tasks" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/tasks/websockets_example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="yfinance_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="InvestApp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tasks" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tasks/yfinance_example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for tests.test_item_api.TestItemAPI.test_data_structure" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="WebStore" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="RUN_TOOL" value="" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_item_api.TestItemAPI.test_data_structure&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests for tests.test_item_api.TestItemAPI.test_get_item" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -143,25 +301,10 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;tests.test_item_api.TestItemAPI.test_get_item&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for tests.test_item_api.TestItemAPI.test_item_update" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="WebStore" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="RUN_TOOL" value="" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_item_api.TestItemAPI.test_item_update&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -175,26 +318,35 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;tests.test_item_api.TestItemAPI.test_status_code&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.QUESTS" />
+      <item itemvalue="Python.websockets_example" />
+      <item itemvalue="Python.yfinance_example" />
+      <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_get_item" />
+      <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_status_code" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_status_code" />
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_get_item" />
-        <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_data_structure" />
-        <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_item_update" />
+        <item itemvalue="Python.websockets_example" />
+        <item itemvalue="Python.QUESTS" />
+        <item itemvalue="Python.yfinance_example" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-ca5e2b39c7df-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.308" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.31033.139" />
+        <option value="bundled-python-sdk-2653e85de345-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.31033.139" />
       </set>
     </attachedChunks>
   </component>
@@ -205,6 +357,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1768761505143</updated>
+      <workItem from="1773996730657" duration="1115000" />
+      <workItem from="1773997889712" duration="22562000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -254,17 +408,258 @@
       <option name="project" value="LOCAL" />
       <updated>1769024122488</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added STOCK feature">
+      <option name="closed" value="true" />
+      <created>1771440406770</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1771440406770</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added STOCK feature">
+      <option name="closed" value="true" />
+      <created>1771440532213</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1771440532214</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added investment planing feature and navigation">
+      <option name="closed" value="true" />
+      <created>1771527162829</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1771527162829</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fix linter issue">
+      <option name="closed" value="true" />
+      <created>1771665894251</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1771665894251</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fix workflow issues">
+      <option name="closed" value="true" />
+      <created>1771666335763</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1771666335763</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update package and add test coverage">
+      <option name="closed" value="true" />
+      <created>1771667336423</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1771667336423</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add fail if low coverage">
+      <option name="closed" value="true" />
+      <created>1771667501929</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1771667501929</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1771668963682</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1771668963682</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1771669381626</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1771669381626</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Refactoring 2">
+      <option name="closed" value="true" />
+      <created>1771669486356</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1771669486356</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Check only 3.10">
+      <option name="closed" value="true" />
+      <created>1771669911485</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1771669911485</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Check only 3.10">
+      <option name="closed" value="true" />
+      <created>1771670147626</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1771670147626</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Consolidate contributor identity under ArtemMint">
+      <option name="closed" value="true" />
+      <created>1771671686999</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1771671686999</updated>
+    </task>
+    <task id="LOCAL-00020" summary="New commit">
+      <option name="closed" value="true" />
+      <created>1771672038404</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1771672038404</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add index.html">
+      <option name="closed" value="true" />
+      <created>1771856419144</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1771856419144</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add HTTPS support and TEST COVERAGE">
+      <option name="closed" value="true" />
+      <created>1772385156730</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1772385156731</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Fix validation and response handling in item API">
+      <option name="closed" value="true" />
+      <created>1772388919088</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1772388919088</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Refactor Docker configuration and environment files for production setup">
+      <option name="closed" value="true" />
+      <created>1772391472800</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1772391472800</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Add script to update DNS records via Cloudflare API">
+      <option name="closed" value="true" />
+      <created>1772441585664</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1772441585664</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Enhance DNS update script to handle EC2 metadata token and error checking for IP retrieval">
+      <option name="closed" value="true" />
+      <created>1772442909194</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1772442909194</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Update Nginx configuration for production setup and enhance DNS update script error handling">
+      <option name="closed" value="true" />
+      <created>1772462533751</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1772462533751</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Update Nginx configuration for production setup and enhance DNS update script error handling">
+      <option name="closed" value="true" />
+      <created>1772462588039</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1772462588039</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Add pytest markers to financial goals, item, and stock API tests for better organization">
+      <option name="closed" value="true" />
+      <created>1772463052946</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1772463052946</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Refactor routing and update HTML file references for cleaner URLs; add tests for main API endpoints">
+      <option name="closed" value="true" />
+      <created>1773162227552</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1773162227552</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Fix missing newline at end of __init__.py for improved file formatting">
+      <option name="closed" value="true" />
+      <created>1773162297454</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1773162297454</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add stock data visualization with moving averages; create CSS and JS files for styling and functionality">
+      <option name="closed" value="true" />
+      <created>1773484203345</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1773484203345</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First commit" />
-    <MESSAGE value="Use only frontend as interface. Updated docs" />
-    <MESSAGE value="Fixed schemas Item." />
     <MESSAGE value="Deleted backend interface render" />
     <MESSAGE value="Updated Home page" />
     <MESSAGE value="Small fixes in the interface and schemas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small fixes in the interface and schemas" />
+    <MESSAGE value="Added STOCK feature" />
+    <MESSAGE value="Added investment planing feature and navigation" />
+    <MESSAGE value="Fix linter issue" />
+    <MESSAGE value="Fix workflow issues" />
+    <MESSAGE value="Update package and add test coverage" />
+    <MESSAGE value="Add fail if low coverage" />
+    <MESSAGE value="Refactoring" />
+    <MESSAGE value="Refactoring 2" />
+    <MESSAGE value="Check only 3.10" />
+    <MESSAGE value="Consolidate contributor identity under ArtemMint" />
+    <MESSAGE value="New commit" />
+    <MESSAGE value="Add index.html" />
+    <MESSAGE value="Add HTTPS support and TEST COVERAGE" />
+    <MESSAGE value="Fix validation and response handling in item API" />
+    <MESSAGE value="Refactor Docker configuration and environment files for production setup" />
+    <MESSAGE value="Add script to update DNS records via Cloudflare API" />
+    <MESSAGE value="Enhance DNS update script to handle EC2 metadata token and error checking for IP retrieval" />
+    <MESSAGE value="Update Nginx configuration for production setup and enhance DNS update script error handling" />
+    <MESSAGE value="Add pytest markers to financial goals, item, and stock API tests for better organization" />
+    <MESSAGE value="Refactor routing and update HTML file references for cleaner URLs; add tests for main API endpoints" />
+    <MESSAGE value="Fix missing newline at end of __init__.py for improved file formatting" />
+    <MESSAGE value="Add stock data visualization with moving averages; create CSS and JS files for styling and functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add stock data visualization with moving averages; create CSS and JS files for styling and functionality" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

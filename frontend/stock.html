@@ -1,104 +1,113 @@
 <!doctype html>
 <html lang="uk">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Графік Акцій</title>
-    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="style/stock.css" />
-  </head>
-  <body>
-    <div class="container">
-      <!-- Navigation -->
-      <nav>
-        <div class="nav-brand">
-          <a class="nav-logo" href="/">💰</a>
-          InvestApp
-        </div>
-        <a href="/stock" class="nav-link active">📈 Акції</a>
-        <a href="/investment_calc" class="nav-link">💹 Інвестиційний Калькулятор</a>
-      </nav>
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>Графік Акцій</title>
+  <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link href="style/stock.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-brand">
+      <a class="nav-logo" href="/">💰</a>
+      InvestApp
+    </div>
+    <a class="nav-link active" href="/stock">📈 Акції</a>
+    <a class="nav-link" href="/investment_calc">💹 Інвестиційний Калькулятор</a>
+    <a class="nav-link" href="/portfolio">💼 Портфелі</a>
+    <div class="nav-auth">
+      <a class="nav-link" href="/login" id="navLogin">Увійти</a>
+      <a class="nav-link" href="/register" id="navRegister">Реєстрація</a>
+      <button class="nav-link" id="navLogout" style="display:none; background:none; border:none; cursor:pointer">Вийти
+      </button>
+    </div>
+  </nav>
 
-      <header>
-        <div class="brand">
-          <div class="logo">📈</div>
-          <div>
-            <h1>Графік Акцій</h1>
-          </div>
-        </div>
-        <div class="controls">
-          <div class="input-group">
-            <label for="ticker">Тікер:</label>
-            <input type="text" id="ticker" value="GOOG" placeholder="" />
-          </div>
-          <div class="input-group">
-            <label for="period">Період:</label>
-            <select id="period">
-              <option value="1d">1 день</option>
-              <option value="5d">5 днів</option>
-              <option value="1mo">1 місяць</option>
-              <option value="3mo">3 місяці</option>
-              <option value="6mo" selected>6 місяців</option>
-              <option value="1y">1 рік</option>
-              <option value="ytd">YTD</option>
-              <option value="5y">5 років</option>
-            </select>
-          </div>
-          <button class="btn" id="loadBtn">Завантажити</button>
-        </div>
-      </header>
-
-      <div class="error" id="errorMsg"></div>
-
-      <div class="stats-grid" id="statsGrid" style="display:none;">
-        <div class="stat-card">
-          <div class="stat-label">Поточна ціна</div>
-          <div class="stat-value" id="currentPrice">-</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Максимум</div>
-          <div class="stat-value" id="highPrice">-</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Мінімум</div>
-          <div class="stat-value" id="lowPrice">-</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Об'єм</div>
-          <div class="stat-value" id="totalVolume">-</div>
-        </div>
-      </div>
-
-      <div class="chart-container">
-        <div class="chart-header">
-          <h2 class="chart-title">
-            <span class="ticker-symbol" id="tickerDisplay"></span>
-          </h2>
-          <div class="chart-info" id="chartInfo">Період: 1mo | Інтервал: 1h</div>
-        </div>
-        <div class="loading" id="loading">Завантаження даних...</div>
-        <div id="chartCanvas"></div>
-      </div>
-
-      <div class="analytics-grid" id="analyticsGrid" style="display:none;">
-        <div class="recommendations-container">
-          <div class="recommendations-header">Рекомендації аналітиків</div>
-          <div id="recommendationsChart"></div>
-        </div>
-
-        <div class="target-price-container">
-          <div class="target-price-header">Цільова ціна</div>
-          <div id="targetPriceChart"></div>
-        </div>
-
-        <div class="earnings-container">
-          <div class="earnings-header">Прибутки (EPS)</div>
-          <div id="earningsChart"></div>
-        </div>
+  <header>
+    <div class="brand">
+      <div class="logo">📈</div>
+      <div>
+        <h1>Графік Акцій</h1>
       </div>
     </div>
-    <script src="js/stock.js"></script>
-  </body>
+    <div class="controls">
+      <div class="input-group">
+        <label for="ticker">Тікер:</label>
+        <input id="ticker" placeholder="" type="text" value="GOOG"/>
+      </div>
+      <div class="input-group">
+        <label for="period">Період:</label>
+        <select id="period">
+          <option value="1d">1 день</option>
+          <option value="5d">5 днів</option>
+          <option value="1mo">1 місяць</option>
+          <option value="3mo">3 місяці</option>
+          <option selected value="6mo">6 місяців</option>
+          <option value="1y">1 рік</option>
+          <option value="ytd">YTD</option>
+          <option value="5y">5 років</option>
+        </select>
+      </div>
+      <button class="btn" id="loadBtn">Завантажити</button>
+    </div>
+  </header>
+
+  <div class="error" id="errorMsg"></div>
+
+  <div class="stats-grid" id="statsGrid" style="display:none;">
+    <div class="stat-card">
+      <div class="stat-label">Поточна ціна</div>
+      <div class="stat-value" id="currentPrice">-</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Максимум</div>
+      <div class="stat-value" id="highPrice">-</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Мінімум</div>
+      <div class="stat-value" id="lowPrice">-</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Об'єм</div>
+      <div class="stat-value" id="totalVolume">-</div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-header">
+      <h2 class="chart-title">
+        <span class="ticker-symbol" id="tickerDisplay"></span>
+      </h2>
+      <div class="chart-info" id="chartInfo">Період: 1mo | Інтервал: 1h</div>
+    </div>
+    <div class="loading" id="loading">Завантаження даних...</div>
+    <div id="chartCanvas"></div>
+  </div>
+
+  <div class="analytics-grid" id="analyticsGrid" style="display:none;">
+    <div class="recommendations-container">
+      <div class="recommendations-header">Рекомендації аналітиків</div>
+      <div id="recommendationsChart"></div>
+    </div>
+
+    <div class="target-price-container">
+      <div class="target-price-header">Цільова ціна</div>
+      <div id="targetPriceChart"></div>
+    </div>
+
+    <div class="earnings-container">
+      <div class="earnings-header">Прибутки (EPS)</div>
+      <div id="earningsChart"></div>
+    </div>
+  </div>
+</div>
+<script src="script/stock.js"></script>
+<script src="script/auth.js"></script>
+</body>
+<footer>Powered by FastAPI & Nginx • Light UI</footer>
 </html>
 

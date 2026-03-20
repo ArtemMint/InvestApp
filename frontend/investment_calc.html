@@ -1,703 +1,130 @@
 <!doctype html>
 <html lang="uk">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Інвестиційний Калькулятор</title>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <style>
-      :root{
-        --bg1: #f6fbff;
-        --bg2: #f3fff9;
-        --card: #ffffff;
-        --muted: #6b7280;
-        --accent: #6ee7b7;
-        --accent-2: #93c5fd;
-        --shadow: 0 6px 18px rgba(16,24,40,0.08);
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      }
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>Інвестиційний Калькулятор</title>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link href="style/investement_calc.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-brand">
+      <a class="nav-logo" href="/">💰</a>
+      InvestApp
+    </div>
+    <a class="nav-link" href="/stock">📈 Акції</a>
+    <a class="nav-link active" href="/investment_calc">💹 Інвестиційний Калькулятор</a>
+    <a class="nav-link" href="/portfolio">💼 Портфелі</a>
+    <div class="nav-auth">
+      <a class="nav-link" href="/login" id="navLogin">Увійти</a>
+      <a class="nav-link" href="/register" id="navRegister">Реєстрація</a>
+      <button class="nav-link" id="navLogout" style="display:none; background:none; border:none; cursor:pointer">Вийти
+      </button>
+    </div>
+  </nav>
 
-      html,body{
-        height:100%;
-        margin:0;
-        background:linear-gradient(135deg,var(--bg1) 0%, var(--bg2) 100%);
-        color:#0f172a;
-      }
+  <header>
+    <div class="brand">
+      <div class="logo">💹</div>
+      <div>
+        <h1>Інвестиційний Калькулятор</h1>
+      </div>
+    </div>
+  </header>
 
-      .container{
-        max-width:1600px;
-        margin:32px auto;
-        padding:24px;
-      }
+  <div class="error" id="errorMsg"></div>
 
-      /* Navigation */
-      nav{
-        background: var(--card);
-        border-radius: 12px;
-        padding: 16px 24px;
-        margin-bottom: 24px;
-        box-shadow: var(--shadow);
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
+  <div class="main-grid">
+    <!-- Form Section (1/3) -->
+    <div class="form-section">
+      <h2 class="form-title">Параметри Інвестування</h2>
 
-      .nav-brand{
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        margin-right: auto;
-      }
+      <div class="form-group">
+        <label for="principal">Початковий капітал ($)</label>
+        <input id="principal" min="0" step="100" type="number" value="0"/>
+        <small>Сума, з якої ви починаєте інвестувати</small>
+      </div>
 
-      .nav-logo{
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        background: linear-gradient(135deg,var(--accent-2),var(--accent));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        text-decoration: none;
-      }
+      <div class="form-group">
+        <label for="monthlyContribution">Щомісячний внесок ($)</label>
+        <input id="monthlyContribution" min="0" step="50" type="number" value="0"/>
+        <small>Сума, яку ви додаєте щомісяця</small>
+      </div>
 
-      .nav-link{
-        padding: 10px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        color: #0f172a;
-        font-weight: 600;
-        transition: all 0.2s;
-        border: 2px solid transparent;
-      }
+      <div class="form-group">
+        <label for="years">Кількість років</label>
+        <input id="years" max="50" min="1" step="1" type="number" value="5"/>
+        <small>Термін інвестування</small>
+      </div>
 
-      .nav-link:hover{
-        background: rgba(110, 231, 183, 0.1);
-        border-color: var(--accent);
-      }
+      <div class="form-group">
+        <label for="annualReturn">Річний прибуток (%)</label>
+        <input id="annualReturn" max="100" min="0" step="0.5" type="number" value="12"/>
+        <small>Очікувана річна дохідність (наприклад, 12%)</small>
+      </div>
 
-      .nav-link.active{
-        background: linear-gradient(180deg,var(--accent),var(--accent-2));
-        color: #04202b;
-      }
+      <div class="form-group">
+        <label for="contributionGrowth">Зростання внесків (%)</label>
+        <input id="contributionGrowth" max="100" min="0" step="0.5" type="number" value="0"/>
+        <small>Річне збільшення щомісячного внеску</small>
+      </div>
 
-      header{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        margin-bottom:20px;
-        flex-wrap: wrap;
-        gap: 16px;
-      }
+      <div class="form-group">
+        <label for="taxRate">Податкова ставка (%)</label>
+        <input id="taxRate" max="100" min="0" step="0.5" type="number" value="18"/>
+        <small>Податок на прибуток (наприклад, 18%)</small>
+      </div>
 
-      .brand{
-        display:flex;
-        align-items:center;
-        gap:12px;
-      }
+      <div class="form-group">
+        <label for="annualInflation">Річна інфляція (%)</label>
+        <input id="annualInflation" max="100" min="0" step="0.5" type="number" value="3"/>
+        <small>Очікувана річна інфляція</small>
+      </div>
 
-      .logo{
-        width:48px;
-        height:48px;
-        border-radius:12px;
-        background:linear-gradient(135deg,var(--accent-2),var(--accent));
-        box-shadow:var(--shadow);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:white;
-        font-weight:700;
-        font-size: 1.5rem;
-      }
+      <button class="btn" id="calculateBtn">Розрахувати</button>
+    </div>
 
-      h1{
-        font-size:1.4rem;
-        margin:0;
-      }
-
-      /* Layout Grid */
-      .main-grid{
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 24px;
-        margin-top: 24px;
-      }
-
-      /* Form Section */
-      .form-section{
-        background: var(--card);
-        border-radius: 12px;
-        padding: 24px;
-        box-shadow: var(--shadow);
-        height: fit-content;
-        position: sticky;
-        top: 24px;
-      }
-
-      .form-title{
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #0f172a;
-      }
-
-      .form-group{
-        margin-bottom: 20px;
-      }
-
-      .form-group label{
-        display: block;
-        font-size: 0.9rem;
-        color: var(--muted);
-        font-weight: 600;
-        margin-bottom: 8px;
-      }
-
-      .form-group input{
-        width: 100%;
-        padding: 12px 16px;
-        border-radius: 8px;
-        border: 1px solid rgba(15,23,42,0.1);
-        background: white;
-        font-size: 1rem;
-        box-sizing: border-box;
-        transition: border-color 0.2s;
-      }
-
-      .form-group input:focus{
-        outline: none;
-        border-color: var(--accent-2);
-      }
-
-      .form-group small{
-        display: block;
-        margin-top: 4px;
-        font-size: 0.8rem;
-        color: var(--muted);
-      }
-
-      .btn{
-        width: 100%;
-        background: linear-gradient(180deg,var(--accent),var(--accent-2));
-        border: none;
-        padding: 14px 20px;
-        border-radius: 10px;
-        color: #04202b;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        box-shadow: 0 8px 20px rgba(99,102,241,0.08);
-        transition: transform 0.2s;
-      }
-
-      .btn:hover{
-        transform: translateY(-2px);
-      }
-
-      .btn:active{
-        transform: translateY(0);
-      }
-
-      /* Chart Section */
-      .chart-section{
-        background: var(--card);
-        border-radius: 12px;
-        padding: 24px;
-        box-shadow: var(--shadow);
-      }
-
-      .chart-header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
-      .chart-title{
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin: 0;
-      }
-
-      .chart-controls{
-        display: flex;
-        gap: 8px;
-      }
-
-      .toggle-btn{
-        padding: 8px 16px;
-        border-radius: 8px;
-        border: 2px solid var(--accent-2);
-        background: white;
-        color: #0f172a;
-        font-weight: 600;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-
-      .toggle-btn.active{
-        background: linear-gradient(180deg,var(--accent),var(--accent-2));
-        color: #04202b;
-        border-color: transparent;
-      }
-
-      .toggle-btn:hover{
-        transform: translateY(-1px);
-      }
-
-      #investmentChart{
-        margin-top: 20px;
-      }
-
-      .stats-grid{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 16px;
-        margin-top: 24px;
-      }
-
-      .stat-card{
-        background: linear-gradient(135deg, rgba(110, 231, 183, 0.1), rgba(147, 197, 253, 0.1));
-        border-radius: 10px;
-        padding: 16px;
-        border: 1px solid rgba(110, 231, 183, 0.3);
-      }
-
-      .stat-label{
-        font-size: 0.85rem;
-        color: var(--muted);
-        margin-bottom: 8px;
-        font-weight: 600;
-      }
-
-      .stat-value{
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #0f172a;
-      }
-
-      .loading{
-        display: none;
-        text-align: center;
-        padding: 60px;
-        color: var(--muted);
-        font-size: 1.1rem;
-      }
-
-      .loading.show{
-        display: block;
-      }
-
-      .error{
-        display: none;
-        background: #fee;
-        color: #c00;
-        padding: 16px;
-        border-radius: 8px;
-        margin-bottom: 16px;
-        border-left: 4px solid #c00;
-      }
-
-      .error.show{
-        display: block;
-      }
-
-      @media (max-width: 1024px){
-        .main-grid{
-          grid-template-columns: 1fr;
-        }
-
-        .form-section{
-          position: static;
-        }
-      }
-
-      @media (max-width: 768px){
-        .container{
-          padding: 16px;
-        }
-
-        .stats-grid{
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Navigation -->
-      <nav>
-        <div class="nav-brand">
-          <a class="nav-logo" href="/">💰</a>
-          InvestApp
+    <!-- Chart Section (2/3) -->
+    <div class="chart-section">
+      <div class="chart-header">
+        <h2 class="chart-title">Прогноз Інвестування</h2>
+        <div class="chart-controls">
+          <button class="toggle-btn active" id="standardBtn">Очікувана вартість</button>
+          <button class="toggle-btn" id="realValueBtn">Реальна Вартість</button>
         </div>
-        <a href="/stock" class="nav-link">📈 Акції</a>
-        <a href="/investment_calc" class="nav-link active">💹 Інвестиційний Калькулятор</a>
-      </nav>
+      </div>
 
-      <header>
-        <div class="brand">
-          <div class="logo">💹</div>
-          <div>
-            <h1>Інвестиційний Калькулятор</h1>
-          </div>
+      <div class="loading" id="loading">Розрахунок...</div>
+      <div id="investmentChart"></div>
+
+      <!-- Summary Stats -->
+      <div class="stats-grid" id="statsGrid" style="display:none;">
+        <div class="stat-card">
+          <div class="stat-label">Всього інвестовано</div>
+          <div class="stat-value" id="totalInvested">-</div>
         </div>
-      </header>
-
-      <div class="error" id="errorMsg"></div>
-
-      <div class="main-grid">
-        <!-- Form Section (1/3) -->
-        <div class="form-section">
-          <h2 class="form-title">Параметри Інвестування</h2>
-
-          <div class="form-group">
-            <label for="principal">Початковий капітал ($)</label>
-            <input type="number" id="principal" value="0" min="0" step="100" />
-            <small>Сума, з якої ви починаєте інвестувати</small>
-          </div>
-
-          <div class="form-group">
-            <label for="monthlyContribution">Щомісячний внесок ($)</label>
-            <input type="number" id="monthlyContribution" value="0" min="0" step="50" />
-            <small>Сума, яку ви додаєте щомісяця</small>
-          </div>
-
-          <div class="form-group">
-            <label for="years">Кількість років</label>
-            <input type="number" id="years" value="5" min="1" max="50" step="1" />
-            <small>Термін інвестування</small>
-          </div>
-
-          <div class="form-group">
-            <label for="annualReturn">Річний прибуток (%)</label>
-            <input type="number" id="annualReturn" value="12" min="0" max="100" step="0.5" />
-            <small>Очікувана річна дохідність (наприклад, 12%)</small>
-          </div>
-
-          <div class="form-group">
-            <label for="contributionGrowth">Зростання внесків (%)</label>
-            <input type="number" id="contributionGrowth" value="0" min="0" max="100" step="0.5" />
-            <small>Річне збільшення щомісячного внеску</small>
-          </div>
-
-          <div class="form-group">
-            <label for="taxRate">Податкова ставка (%)</label>
-            <input type="number" id="taxRate" value="18" min="0" max="100" step="0.5" />
-            <small>Податок на прибуток (наприклад, 18%)</small>
-          </div>
-
-          <div class="form-group">
-            <label for="annualInflation">Річна інфляція (%)</label>
-            <input type="number" id="annualInflation" value="3" min="0" max="100" step="0.5" />
-            <small>Очікувана річна інфляція</small>
-          </div>
-
-          <button class="btn" id="calculateBtn">Розрахувати</button>
+        <div class="stat-card">
+          <div class="stat-label">Підсумковий баланс</div>
+          <div class="stat-value" id="finalBalance">-</div>
         </div>
-
-        <!-- Chart Section (2/3) -->
-        <div class="chart-section">
-          <div class="chart-header">
-            <h2 class="chart-title">Прогноз Інвестування</h2>
-            <div class="chart-controls">
-              <button class="toggle-btn active" id="standardBtn">Очікувана вартість</button>
-              <button class="toggle-btn" id="realValueBtn">Реальна Вартість</button>
-            </div>
-          </div>
-
-          <div class="loading" id="loading">Розрахунок...</div>
-          <div id="investmentChart"></div>
-
-          <!-- Summary Stats -->
-          <div class="stats-grid" id="statsGrid" style="display:none;">
-            <div class="stat-card">
-              <div class="stat-label">Всього інвестовано</div>
-              <div class="stat-value" id="totalInvested">-</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Підсумковий баланс</div>
-              <div class="stat-value" id="finalBalance">-</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Чистий прибуток</div>
-              <div class="stat-value" id="totalProfit">-</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Реальна вартість</div>
-              <div class="stat-value" id="realValue">-</div>
-            </div>
-          </div>
+        <div class="stat-card">
+          <div class="stat-label">Чистий прибуток</div>
+          <div class="stat-value" id="totalProfit">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Реальна вартість</div>
+          <div class="stat-value" id="realValue">-</div>
         </div>
       </div>
     </div>
-
-    <script>
-      const apiBase = '/api/v1/financial_goals';
-
-      let chart = null;
-      let currentData = null;
-      let currentMode = 'standard'; // 'standard' or 'realValue'
-
-      async function calculateInvestment() {
-        // Get form values
-        const principal = parseInt(document.getElementById('principal').value);
-        const monthlyContribution = parseInt(document.getElementById('monthlyContribution').value);
-        const years = parseInt(document.getElementById('years').value);
-        const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
-        const contributionGrowth = parseFloat(document.getElementById('contributionGrowth').value) / 100;
-        const taxRate = parseFloat(document.getElementById('taxRate').value) / 100;
-        const annualInflation = parseFloat(document.getElementById('annualInflation').value) / 100;
-
-        hideError();
-        showLoading(true);
-        document.getElementById('statsGrid').style.display = 'none';
-
-        try {
-          const url = `${apiBase}/?principal=${principal}&monthly_contribution=${monthlyContribution}&years=${years}&annual_return=${annualReturn}&contribution_growth=${contributionGrowth}&tax_rate=${taxRate}&annual_inflation=${annualInflation}`;
-
-          const response = await fetch(url);
-          const data = await response.json();
-
-          if (!data || data.length === 0) {
-            showError('Помилка при отриманні даних');
-            showLoading(false);
-            return;
-          }
-
-          currentData = data;
-          displayChart(currentMode);
-          updateStats(data);
-
-          showLoading(false);
-          document.getElementById('statsGrid').style.display = 'grid';
-        } catch (error) {
-          showError('Помилка завантаження даних: ' + error.message);
-          showLoading(false);
-        }
-      }
-
-      function displayChart(mode) {
-        if (!currentData) return;
-
-        const categories = [];
-        const investedData = [];
-        const balanceData = [];
-        const profitData = [];
-        const realValueData = [];
-
-        // Sample data every year for better visualization
-        currentData.forEach((item) => {
-          if (item.month % 12 === 0) {
-            const year = item.month / 12;
-            categories.push(`Рік ${year}`);
-            investedData.push(item.invested);
-            balanceData.push(item.total_balance);
-            profitData.push(item.profit);
-            realValueData.push(item.real_value);
-          }
-        });
-
-        if (chart) {
-          chart.destroy();
-        }
-
-        let series;
-        if (mode === 'standard') {
-          series = [
-            {
-              name: 'Інвестовано',
-              data: investedData
-            },
-            {
-              name: 'Баланс',
-              data: balanceData
-            },
-            {
-              name: 'Прибуток',
-              data: profitData
-            }
-          ];
-        } else {
-          series = [
-            {
-              name: 'Реальна вартість',
-              data: realValueData
-            }
-          ];
-        }
-
-        const options = {
-          series: series,
-          chart: {
-            type: 'line',
-            height: 450,
-            toolbar: {
-              show: true,
-              tools: {
-                download: true,
-                selection: false,
-                zoom: true,
-                zoomin: true,
-                zoomout: true,
-                pan: false,
-                reset: true
-              }
-            },
-            animations: {
-              enabled: true,
-              easing: 'easeinout',
-              speed: 500,
-            dynamicAnimation: {
-                speed: 300
-            }
-            }
-          },
-          stroke: {
-            curve: 'straight',
-            width: 3
-          },
-          colors: mode === 'standard'
-            ? ['#93c5fd', '#10b981', '#fbbf24']
-            : ['#ef4444'],
-          dataLabels: {
-            enabled: false
-          },
-          markers: {
-            size: 5,
-            hover: {
-              size: 7
-            }
-          },
-          xaxis: {
-            categories: categories,
-            title: {
-              text: 'Період',
-              style: {
-                fontSize: '14px',
-                fontWeight: 600
-              }
-            }
-          },
-          yaxis: {
-            title: {
-              text: 'Сума ($)',
-              style: {
-                fontSize: '14px',
-                fontWeight: 600
-              }
-            },
-            labels: {
-              formatter: function(val) {
-                return formatCurrency(val);
-              }
-            }
-          },
-          tooltip: {
-            shared: true,
-            intersect: false,
-            y: {
-              formatter: function(val) {
-                return formatCurrency(val);
-              }
-            }
-          },
-          legend: {
-            position: 'top',
-            horizontalAlign: 'center',
-            fontSize: '14px',
-            fontWeight: 600,
-            markers: {
-              width: 12,
-              height: 12,
-              radius: 6
-            }
-          },
-          grid: {
-            borderColor: '#f0f0f0',
-            strokeDashArray: 4
-          }
-        };
-
-        chart = new ApexCharts(document.querySelector("#investmentChart"), options);
-        chart.render();
-      }
-
-      function updateStats(data) {
-        if (!data || data.length === 0) return;
-
-        const lastMonth = data[data.length - 1];
-
-        document.getElementById('totalInvested').textContent = formatCurrency(lastMonth.invested);
-        document.getElementById('finalBalance').textContent = formatCurrency(lastMonth.total_balance);
-        document.getElementById('totalProfit').textContent = formatCurrency(lastMonth.profit);
-        document.getElementById('realValue').textContent = formatCurrency(lastMonth.real_value);
-      }
-
-      function formatCurrency(value) {
-        if (value >= 1000000) {
-          return (value / 1000000).toFixed(2) + ' млн $';
-        } else if (value >= 1000) {
-          return (value / 1000).toFixed(1) + ' тис $';
-        }
-        return value.toFixed(2) + ' $';
-      }
-
-      function showLoading(show) {
-        const loading = document.getElementById('loading');
-        const chartDiv = document.getElementById('investmentChart');
-
-        if (show) {
-          loading.classList.add('show');
-          chartDiv.style.display = 'none';
-        } else {
-          loading.classList.remove('show');
-          chartDiv.style.display = 'block';
-        }
-      }
-
-      function showError(message) {
-        const errorElement = document.getElementById('errorMsg');
-        errorElement.textContent = message;
-        errorElement.classList.add('show');
-      }
-
-      function hideError() {
-        document.getElementById('errorMsg').classList.remove('show');
-      }
-
-      // Event listeners
-      document.getElementById('calculateBtn').addEventListener('click', calculateInvestment);
-
-      document.getElementById('standardBtn').addEventListener('click', () => {
-        currentMode = 'standard';
-        document.getElementById('standardBtn').classList.add('active');
-        document.getElementById('realValueBtn').classList.remove('active');
-        if (currentData) {
-          displayChart(currentMode);
-        }
-      });
-
-      document.getElementById('realValueBtn').addEventListener('click', () => {
-        currentMode = 'realValue';
-        document.getElementById('realValueBtn').classList.add('active');
-        document.getElementById('standardBtn').classList.remove('active');
-        if (currentData) {
-          displayChart(currentMode);
-        }
-      });
-
-      // Load initial calculation on page load
-      window.addEventListener('load', () => {
-        calculateInvestment();
-      });
-    </script>
-  </body>
+  </div>
+</div>
+<script src="script/investement_calc.js"></script>
+<script src="script/auth.js"></script>
+</body>
+<footer>Powered by FastAPI & Nginx • Light UI</footer>
 </html>
 

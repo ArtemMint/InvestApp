@@ -1,13 +1,14 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse, FileResponse
 from pathlib import Path
 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+
+from app.db.base_class import Base
 from .api.v1.api import api_router
 from .core.config import settings
 from .db.session import engine
-from app.db.base_class import Base
 
 # Ensure DB tables are created (for small projects)
 Base.metadata.create_all(bind=engine)
@@ -44,27 +45,43 @@ def get_application() -> FastAPI:
 
 app = get_application()
 
+
 # Keep a simple JSON health endpoint
 @app.get("/health")
 async def health():
     return JSONResponse({"status": "ok", "message": "API is running"})
+
 
 # Serve the main index.html
 @app.get("/")
 async def read_index():
     return FileResponse(project_root / "frontend" / "index.html")
 
+
 # Serve the stock.html at /stock
 @app.get("/stock")
 async def read_stock():
     return FileResponse(project_root / "frontend" / "stock.html")
+
 
 # Serve the investment_calc.html
 @app.get("/investment_calc")
 async def read_investment_calc():
     return FileResponse(project_root / "frontend" / "investment_calc.html")
 
-# Serve the items.html
-@app.get("/item")
-async def read_item():
-    return FileResponse(project_root / "frontend" / "items.html")
+
+# Serve the portfolio.html
+@app.get("/portfolio")
+async def read_portfolio():
+    return FileResponse(project_root / "frontend" / "portfolio.html")
+
+
+# Serve the login and register pages
+@app.get("/login")
+async def read_login():
+    return FileResponse(project_root / "frontend" / "login.html")
+
+
+@app.get("/register")
+async def read_register():
+    return FileResponse(project_root / "frontend" / "register.html")
