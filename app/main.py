@@ -1,12 +1,14 @@
+import os
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.db.base_class import Base
 from .api.v1.api import api_router
+from .core.auth import is_token_valid
 from .core.config import settings
 from .db.session import engine
 
@@ -46,6 +48,17 @@ def get_application() -> FastAPI:
 app = get_application()
 
 
+# Create tables on startup when appropriate (useful for local/dev).
+@app.on_event("startup")
+def create_tables_on_startup():
+    if os.getenv("TESTING") == "1":
+        return
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception:
+        pass
+
+
 # Keep a simple JSON health endpoint
 @app.get("/health")
 async def health():
@@ -60,19 +73,28 @@ async def read_index():
 
 # Serve the stock.html at /stock
 @app.get("/stock")
-async def read_stock():
+async def read_stock(request: Request):
+    redirect = is_token_valid(request)
+    if redirect:
+        return redirect
     return FileResponse(project_root / "frontend" / "stock.html")
 
 
 # Serve the investment_calc.html
 @app.get("/investment_calc")
-async def read_investment_calc():
+async def read_investment_calc(request: Request):
+    redirect = is_token_valid(request)
+    if redirect:
+        return redirect
     return FileResponse(project_root / "frontend" / "investment_calc.html")
 
 
 # Serve the portfolio.html
 @app.get("/portfolio")
-async def read_portfolio():
+async def read_portfolio(request: Request):
+    redirect = is_token_valid(request)
+    if redirect:
+        return redirect
     return FileResponse(project_root / "frontend" / "portfolio.html")
 
 

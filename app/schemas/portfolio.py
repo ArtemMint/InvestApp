@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class PortfolioBase(BaseModel):
@@ -17,6 +17,7 @@ class PortfolioCreate(PortfolioBase):
 class PortfolioUpdate(BaseModel):
     name: str | None = Field(None, min_length=1, max_length=100)
     currency: str | None = Field(None, max_length=3)
+    updated_at: datetime | None = Field(default_factory=datetime.now)
 
 
 class PortfolioResponse(PortfolioBase):
@@ -25,5 +26,4 @@ class PortfolioResponse(PortfolioBase):
     created_at: datetime
     updated_at: datetime | None = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

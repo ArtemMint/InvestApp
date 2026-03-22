@@ -21,7 +21,7 @@ async function calculateInvestment() {
     try {
         const url = `${apiBase}/?principal=${principal}&monthly_contribution=${monthlyContribution}&years=${years}&annual_return=${annualReturn}&contribution_growth=${contributionGrowth}&tax_rate=${taxRate}&annual_inflation=${annualInflation}`;
 
-        const response = await fetch(url);
+        const response = await apiFetch(url);
         const data = await response.json();
 
         if (!data || data.length === 0) {
@@ -31,11 +31,11 @@ async function calculateInvestment() {
         }
 
         currentData = data;
-        displayChart(currentMode);
         updateStats(data);
 
         showLoading(false);
         document.getElementById('statsGrid').style.display = 'grid';
+        displayChart(currentMode);
     } catch (error) {
         showError('Помилка завантаження даних: ' + error.message);
         showLoading(false);
@@ -214,10 +214,12 @@ function showLoading(show) {
 
     if (show) {
         loading.classList.add('show');
-        chartDiv.style.display = 'none';
+        chartDiv.style.opacity = '0.3';
+        chartDiv.style.pointerEvents = 'none';
     } else {
         loading.classList.remove('show');
-        chartDiv.style.display = 'block';
+        chartDiv.style.opacity = '1';
+        chartDiv.style.pointerEvents = 'auto';
     }
 }
 

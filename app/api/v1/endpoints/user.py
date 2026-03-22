@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from fastapi import HTTPException, APIRouter, Depends, Response
+from fastapi import HTTPException, APIRouter, Depends, Response, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 @log_request
-@router.get("/{email}", response_model=UserResponse, status_code=200)
+@router.get("/{email}", response_model=UserResponse, status_code=status.HTTP_200_OK)
 async def get_user(
         email: str,
         db: Session = Depends(get_db)
@@ -29,36 +29,34 @@ async def get_user(
     """
     user = get_user_by_email(db, email=email)
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return UserResponse.model_validate(user)
 
 
 @log_request
-@router.post("/register", response_model=UserResponse, status_code=201)
+@router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 async def register_user(
-        email: str,
-        password: str,
+        user_in: UserRegister,
         db: Session = Depends(get_db)
 ) -> UserResponse:
     """
     Create a new user with the given email and password hash.
     Raises HTTPException if the email is already registered.
 
-    :param email: user's email
-    :param password: user's password (will be hashed)
+    :param user_in: UserRegister object containing email and password
     :param db: database session
     :return: Created user information. Raises HTTPException if email is already registered.
     """
-    existing_user = get_user_by_email(db, email=email)
+    existing_user = get_user_by_email(db, email=user_in.email)
     if existing_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
 
-    new_user = create_user(db, user_in=UserRegister(email=email, password=password))
+    new_user = create_user(db, user_in=UserRegister(email=user_in.email, password=user_in.password))
     return UserResponse.model_validate(new_user)
 
 
 @log_request
-@router.put("/password", response_model=UserResponse, status_code=200)
+@router.put("/password", response_model=UserResponse, status_code=status.HTTP_200_OK)
 async def change_password(
         user_update: UserUpdate,
         db: Session = Depends(get_db)
@@ -72,13 +70,13 @@ async def change_password(
     """
     user = get_user_by_email(db, email=user_update.email)
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     updated_user = update_user_password(db, user=user, new_password=user_update.password)
     return UserResponse.model_validate(updated_user)
 
 
 @log_request
-@router.post("/login", status_code=200)
+@router.post("/login", status_code=status.HTTP_200_OK)
 async def login_user(
         response: Response,
         form_data: OAuth2PasswordRequestForm = Depends(),
@@ -94,8 +92,8 @@ async def login_user(
     """
     user = authenticate_user(db, user_in=form_data)
     if not user:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-    access_token = create_access_token(subject=user.email, expires_delta=timedelta(minutes=60))
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    access_token = create_access_token(subject=user.email, expires_delta=timedelta(hours=24))
     response.set_cookie(
         key="access_token",
         value=f"Bearer {access_token}",
@@ -108,19 +106,22 @@ async def login_user(
 
 
 @log_request
-@router.post("/logout", status_code=200)
-async def logout_user(response: Response) -> dict:
+@router.post("/logout", status_code=status.HTTP_200_OK)
+async def logout_user(
+        response: Response,
+        current_user=Depends(get_current_user)
+) -> dict[str, str]:
     """
     Logout user by clearing the 'access_token' cookie. Frontend should call this (with credentials included)
     to remove the HttpOnly cookie set at login.
     """
     # instruct browser to delete cookie
     response.delete_cookie(key="access_token", path="/")
-    return {"msg": "logged out"}
+    return {"msg": f"{current_user.email} logged out"}
 
 
 @log_request
-@router.delete("/{email}", status_code=204)
+@router.delete("/{email}", status_code=status.HTTP_204_NO_CONTENT)
 async def remove_user(
         email: str,
         db: Session = Depends(get_db)
@@ -133,11 +134,11 @@ async def remove_user(
     :return: None. Raises HTTPException if user is not found.
     """
     delete_user(db, email=email)
-    return Response(status_code=204)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @log_request
-@router.get("/me", response_model=UserResponse, status_code=200)
+@router.get("/me", response_model=UserResponse, status_code=status.HTTP_200_OK)
 async def read_current_user(
         current_user=Depends(get_current_user)
 ) -> UserResponse:
@@ -149,5 +150,5 @@ async def read_current_user(
     :return: Current user's information. Raises HTTPException if user is not authenticated.
     """
     if not current_user:
-        raise HTTPException(status_code=401, detail="Not authenticated")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
     return UserResponse.model_validate(current_user)

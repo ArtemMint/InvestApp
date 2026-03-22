@@ -146,7 +146,7 @@ async function loadStockData() {
     document.getElementById('statsGrid').style.display = 'none';
 
     try {
-        const response = await fetch(`${apiBase}/?stock_ticker=${ticker}&period=${period}&interval=${interval}`);
+        const response = await apiFetch(`${apiBase}/?stock_ticker=${ticker}&period=${period}&interval=${interval}`);
         const data = await response.json();
 
         if (data.error) {
@@ -311,9 +311,9 @@ async function loadAllAnalytics(ticker) {
     try {
         // Load all three endpoints in parallel
         const [recommendations, targetPrice, earnings] = await Promise.all([
-            fetch(`${apiBase}/recommendations?stock_ticker=${ticker}`).then(r => r.json()).catch(() => null),
-            fetch(`${apiBase}/price_target?stock_ticker=${ticker}`).then(r => r.json()).catch(() => null),
-            fetch(`${apiBase}/earnings_history?stock_ticker=${ticker}`).then(r => r.json()).catch(() => null)
+            apiFetch(`${apiBase}/recommendations?stock_ticker=${ticker}`).then(r => r.json()).catch(() => null),
+            apiFetch(`${apiBase}/price_target?stock_ticker=${ticker}`).then(r => r.json()).catch(() => null),
+            apiFetch(`${apiBase}/earnings_history?stock_ticker=${ticker}`).then(r => r.json()).catch(() => null)
         ]);
 
         let hasData = false;
@@ -343,7 +343,7 @@ async function loadAllAnalytics(ticker) {
 
 async function loadRecommendations(ticker) {
     try {
-        const response = await fetch(`${apiBase}/recommendations?stock_ticker=${ticker}`);
+        const response = await apiFetch(`${apiBase}/recommendations?stock_ticker=${ticker}`);
         const data = await response.json();
 
         if (data.error || !data.strongBuy) {

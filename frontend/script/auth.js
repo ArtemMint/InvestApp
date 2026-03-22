@@ -1,6 +1,27 @@
 // auth.js - simple auth helpers for UI: register, login, logout, token storage
 const authApi = '/api/v1/users';
 
+// Generic fetch wrapper that includes credentials and handles 401 (token expired)
+async function apiFetch(path, options = {}) {
+    options.credentials = options.credentials || 'include';
+    const res = await fetch(path, options);
+    if (res.status === 401) {
+        // try to clear cookie on server side
+        try {
+            await fetch(`${authApi}/logout`, {method: 'POST', credentials: 'include'});
+        } catch (_) {}
+        // clear local storage and redirect to login
+        clearToken();
+        localStorage.removeItem('auth_user');
+        window.location.href = '/login';
+        return res;
+    }
+    return res;
+}
+
+// expose as global for non-module scripts
+window.apiFetch = apiFetch;
+
 function setToken(token) {
     localStorage.setItem('access_token', token);
     // update nav UI
@@ -18,9 +39,8 @@ function getToken() {
 
 async function registerUI(email, password) {
     // keep previous register behavior (returns created user)
-    const res = await fetch(`${authApi}/register?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
-        method: 'POST',
-        credentials: 'include'
+    const res = await apiFetch(`${authApi}/register?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
+        method: 'POST'
     });
     return res;
 }
@@ -30,11 +50,10 @@ async function loginUI(email, password) {
     const form = new URLSearchParams();
     form.append('username', email);
     form.append('password', password);
-    const res = await fetch(`${authApi}/login`, {
+    const res = await apiFetch(`${authApi}/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: form.toString(),
-        credentials: 'include'
     });
     if (!res.ok) return res;
     const data = await res.json();
@@ -68,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLogout.addEventListener('click', async () => {
             // call backend to clear cookie
             try {
-                await fetch(`${authApi}/logout`, {method: 'POST', credentials: 'include'});
+                                await apiFetch(`${authApi}/logout`, {method: 'POST'});
             } catch (_) {
             }
             clearToken();

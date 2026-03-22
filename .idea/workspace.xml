@@ -1,60 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f855960b-6526-4524-9829-ecb0b06f7826" name="Changes" comment="Add stock data visualization with moving averages; create CSS and JS files for styling and functionality">
-      <change afterPath="$PROJECT_DIR$/app/core/auth.py" afterDir="false" />
+    <list default="true" id="f855960b-6526-4524-9829-ecb0b06f7826" name="Changes" comment="Implement user authentication and portfolio management features; add user and portfolio models, CRUD operations, and update frontend for login and registration">
       <change afterPath="$PROJECT_DIR$/app/core/security.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/crud/user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/asset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/portfolio.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/positions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/transaction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/schemas/asset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/schemas/portfolio.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/schemas/token.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/script/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/script/investement_calc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/script/portfolio.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/style/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/style/investement_calc.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/style/portfolio.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_user_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/test_portfolio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/test_user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/crud/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/crud/test_portfolio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/crud/test_user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/financial_goals.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/financial_goals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/portfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/stock.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/stock.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/portfolio.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/v1/endpoints/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/v1/endpoints/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/crud/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crud/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/crud/item.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crud/portfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/db/base_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/db/base_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/crud/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/crud/portfolio.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/item.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/item.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/portfolio.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/investment_calc.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/investment_calc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/items.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/portfolio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/stock.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/script/stock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/nginx.prod.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.prod.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/script/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/script/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/script/investement_calc.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/script/investement_calc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/script/portfolio.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/script/portfolio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/script/stock.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/script/stock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/stock.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/stock.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/style/stock.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/style/stock.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_fast_api_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_fast_api_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_financial_goals_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_financial_goals_api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_item_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_item_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_fast_api_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/test_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_financial_goals_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/test_financial_goals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_item_api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_stock_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/test_stock.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +41,7 @@
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedChatMode">
-    <option name="chatModeId" value="Agent" />
+    <option name="chatModeId" value="Ask" />
   </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
@@ -139,10 +112,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/app/api/v1/endpoints/financial_goals.py" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -165,6 +138,9 @@
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_item_create.executor": "Run",
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_item_update.executor": "Run",
     "Python tests.Python tests for tests.test_item_api.TestItemAPI.test_status_code.executor": "Run",
+    "Python tests.Python tests for tests.test_item_api.TestPortfolioAPI.test_portfolios_returns_200.executor": "Run",
+    "Python tests.Python tests for tests.test_user_api.TestUserAPI.executor": "Run",
+    "Python tests.Python tests for tests.test_user_api.TestUserAPI.test_register_user.executor": "Run",
     "Python.49_group_anagrams.executor": "Run",
     "Python.HASH.executor": "Run",
     "Python.QUESTS.executor": "Run",
@@ -186,10 +162,10 @@
     "SHELLCHECK.PATH": "/home/artem/.local/share/JetBrains/PyCharm2025.3/Shell Script/shellcheck",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "git-widget-placeholder": "users-and-portfolio-feature",
-    "last_opened_file_path": "/home/artem/XperiProjects/vision_tester",
+    "last_opened_file_path": "/home/artem/PycharmProjects/InvestApp/tests/crud",
     "list.type.of.created.stylesheet": "CSS",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "FeaturesTrainerSettingsPanel",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -200,95 +176,75 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/crud" />
       <recent name="$PROJECT_DIR$/frontend" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/crud" />
+      <recent name="$PROJECT_DIR$/tests/api" />
       <recent name="$PROJECT_DIR$/frontend" />
       <recent name="$PROJECT_DIR$/frontend/template" />
       <recent name="$PROJECT_DIR$/frontend/js" />
-      <recent name="$PROJECT_DIR$/tasks" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.yfinance_example">
-    <configuration name="QUESTS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="InvestApp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tasks" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tasks/QUESTS.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="websockets_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="InvestApp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/tasks" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/tasks/websockets_example.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="yfinance_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="InvestApp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tasks" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tasks/yfinance_example.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for tests.api.test_portfolio.TestPortfolioAPI.test_portfolios_returns_200" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="InvestApp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.api.test_portfolio.TestPortfolioAPI.test_portfolios_returns_200&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for tests.api.test_user.TestUserAPI" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="InvestApp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.api.test_user.TestUserAPI&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for tests.api.test_user_api.TestUserAPI" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="InvestApp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.api.test_user_api.TestUserAPI&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests for tests.test_item_api.TestItemAPI.test_get_item" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -325,20 +281,36 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for tests.test_user_api.TestUserAPI" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="InvestApp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_user_api.TestUserAPI&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.QUESTS" />
-      <item itemvalue="Python.websockets_example" />
-      <item itemvalue="Python.yfinance_example" />
+      <item itemvalue="Python tests.Python tests for tests.api.test_portfolio.TestPortfolioAPI.test_portfolios_returns_200" />
+      <item itemvalue="Python tests.Python tests for tests.api.test_user.TestUserAPI" />
       <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_get_item" />
       <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_status_code" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for tests.api.test_user.TestUserAPI" />
+        <item itemvalue="Python tests.Python tests for tests.api.test_user_api.TestUserAPI" />
+        <item itemvalue="Python tests.Python tests for tests.api.test_portfolio.TestPortfolioAPI.test_portfolios_returns_200" />
         <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_status_code" />
         <item itemvalue="Python tests.Python tests for tests.test_item_api.TestItemAPI.test_get_item" />
-        <item itemvalue="Python.websockets_example" />
-        <item itemvalue="Python.QUESTS" />
-        <item itemvalue="Python.yfinance_example" />
       </list>
     </recent_temporary>
   </component>
@@ -358,7 +330,14 @@
       <option name="presentableId" value="Default" />
       <updated>1768761505143</updated>
       <workItem from="1773996730657" duration="1115000" />
-      <workItem from="1773997889712" duration="22562000" />
+      <workItem from="1773997889712" duration="23813000" />
+      <workItem from="1774025171697" duration="340000" />
+      <workItem from="1774025532690" duration="58000" />
+      <workItem from="1774025622121" duration="5233000" />
+      <workItem from="1774034823297" duration="1432000" />
+      <workItem from="1774083711573" duration="496000" />
+      <workItem from="1774097173273" duration="287000" />
+      <workItem from="1774178917442" duration="14765000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -616,7 +595,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773484203345</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Implement user authentication and portfolio management features; add user and portfolio models, CRUD operations, and update frontend for login and registration">
+      <option name="closed" value="true" />
+      <created>1774023457596</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1774023457597</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -634,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Deleted backend interface render" />
     <MESSAGE value="Updated Home page" />
     <MESSAGE value="Small fixes in the interface and schemas" />
     <MESSAGE value="Added STOCK feature" />
@@ -659,7 +645,11 @@
     <MESSAGE value="Refactor routing and update HTML file references for cleaner URLs; add tests for main API endpoints" />
     <MESSAGE value="Fix missing newline at end of __init__.py for improved file formatting" />
     <MESSAGE value="Add stock data visualization with moving averages; create CSS and JS files for styling and functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add stock data visualization with moving averages; create CSS and JS files for styling and functionality" />
+    <MESSAGE value="Implement user authentication and portfolio management features; add user and portfolio models, CRUD operations, and update frontend for login and registration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement user authentication and portfolio management features; add user and portfolio models, CRUD operations, and update frontend for login and registration" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/InvestApp$.coverage" NAME=" Coverage Results" MODIFIED="1774191309716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

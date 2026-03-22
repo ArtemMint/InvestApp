@@ -1,9 +1,6 @@
 const apiBase = '/api/v1/portfolio';
 
-// token may change during session, read dynamically
-function getToken() {
-    return localStorage.getItem('access_token');
-}
+// token may change during session; tokens are stored as HttpOnly cookie for production
 
 
 // UI helpers
@@ -36,12 +33,11 @@ async function listItems() {
     const empty = document.getElementById('emptyState');
     grid.innerHTML = 'Завантаження...';
     try {
-        const res = await fetch(apiBase + '/', {
+        const res = await apiFetch(apiBase + '/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            credentials: 'include'
+            }
         });
         if (!res.ok) {
             grid.innerHTML = '';
@@ -82,9 +78,8 @@ async function listItems() {
                 if (!confirm('Ви впевнені, що хочете видалити цей портфель?')) return;
                 deleteBtn.disabled = true;
                 try {
-                    const res = await fetch(apiBase + '/' + it.id, {
-                        method: 'DELETE',
-                        credentials: 'include'
+                    const res = await apiFetch(apiBase + '/' + it.id, {
+                        method: 'DELETE'
                     });
                     if (!res.ok) {
                         alert('Не вдалося видалити: ' + res.status);
@@ -112,12 +107,11 @@ async function listItems() {
 
 async function createItem({name, currency, is_imported}) {
     const payload = {name, currency, is_imported};
-    const res = await fetch(apiBase + '/', {
+    const res = await apiFetch(apiBase + '/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        credentials: 'include',
         body: JSON.stringify(payload)
     });
     if (!res.ok) {

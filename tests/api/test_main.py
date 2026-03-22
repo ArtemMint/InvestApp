@@ -36,7 +36,7 @@ class TestMainAPI:
         assert response.status_code == 200
 
     @pytest.mark.main_api
-    def test_get_items_html(self, client):
-        """The /item endpoint should return 200 and serve the items.html file."""
-        response = client.get("/item")
+    def test_get_portfolio_html(self, client):
+        """The /portfolio endpoint should return 200 and serve the portfolio.html file."""
+        response = client.get("/portfolio")
         assert response.status_code == 200
