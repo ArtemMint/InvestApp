@@ -1,13 +1,16 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse, FileResponse
+import os
 from pathlib import Path
 
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+
+from app.db.base_class import Base
 from .api.v1.api import api_router
+from .core.auth import is_token_valid
 from .core.config import settings
 from .db.session import engine
-from app.db.base_class import Base
 
 # Ensure DB tables are created (for small projects)
 Base.metadata.create_all(bind=engine)
@@ -44,27 +47,63 @@ def get_application() -> FastAPI:
 
 app = get_application()
 
+
+# Create tables on startup when appropriate (useful for local/dev).
+@app.on_event("startup")
+def create_tables_on_startup():
+    if os.getenv("TESTING") == "1":
+        return
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception:
+        pass
+
+
 # Keep a simple JSON health endpoint
 @app.get("/health")
 async def health():
     return JSONResponse({"status": "ok", "message": "API is running"})
+
 
 # Serve the main index.html
 @app.get("/")
 async def read_index():
     return FileResponse(project_root / "frontend" / "index.html")
 
+
 # Serve the stock.html at /stock
 @app.get("/stock")
-async def read_stock():
+async def read_stock(request: Request):
+    redirect = is_token_valid(request)
+    if redirect:
+        return redirect
     return FileResponse(project_root / "frontend" / "stock.html")
+
 
 # Serve the investment_calc.html
 @app.get("/investment_calc")
-async def read_investment_calc():
+async def read_investment_calc(request: Request):
+    redirect = is_token_valid(request)
+    if redirect:
+        return redirect
     return FileResponse(project_root / "frontend" / "investment_calc.html")
 
-# Serve the items.html
-@app.get("/item")
-async def read_item():
-    return FileResponse(project_root / "frontend" / "items.html")
+
+# Serve the portfolio.html
+@app.get("/portfolio")
+async def read_portfolio(request: Request):
+    redirect = is_token_valid(request)
+    if redirect:
+        return redirect
+    return FileResponse(project_root / "frontend" / "portfolio.html")
+
+
+# Serve the login and register pages
+@app.get("/login")
+async def read_login():
+    return FileResponse(project_root / "frontend" / "login.html")
+
+
+@app.get("/register")
+async def read_register():
+    return FileResponse(project_root / "frontend" / "register.html")

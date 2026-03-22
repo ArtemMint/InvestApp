@@ -1,13 +1,22 @@
+"""
+Application configuration settings using Pydantic's BaseSettings.
+This class loads settings from environment variables and .env files, providing a centralized place for
+all configuration values used across the application.
+"""
 import os
+from typing import List
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import List, Optional
 
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "FastAPI App 2026"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
+
+    SECRET_KEY: str = os.getenv("SECRET_KEY")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 1 day
+    ALGORITHM: str = "HS256"
 
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
 
@@ -18,8 +27,8 @@ class Settings(BaseSettings):
     POSTGRES_DB: str = os.getenv("POSTGRES_DB", "invest_db")
     POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "localhost")
     POSTGRES_PORT: int = os.getenv("POSTGRES_PORT", 5432)
-    DATABASE_URL: Optional[str] = os.getenv("DATABASE_URL",
-                                            "postgresql://postgres:postgres@localhost:5432/invest_db")
+    DATABASE_URL: str | None = os.getenv("DATABASE_URL",
+                                         "postgresql://postgres:postgres@localhost:5432/invest_db")
 
     model_config = SettingsConfigDict(
         env_file=".env",

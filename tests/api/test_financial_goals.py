@@ -168,5 +168,3 @@ class TestCalculateInvestmentHistory:
         invested_growth = resp_growth.json()[-1]["invested"]
 
         assert invested_growth > invested_base
-
-

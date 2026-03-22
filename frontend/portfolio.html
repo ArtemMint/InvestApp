@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>Портфелі</title>
+  <link href="style/portfolio.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-brand">
+      <a class="nav-logo" href="/">💰</a>
+      InvestApp
+    </div>
+    <a class="nav-link" href="/stock">📈 Акції</a>
+    <a class="nav-link" href="/investment_calc">💹 Інвестиційний Калькулятор</a>
+    <a class="nav-link active" href="/portfolio">💼 Портфелі</a>
+    <div class="nav-auth">
+      <a class="nav-link" href="/login" id="navLogin">Увійти</a>
+      <a class="nav-link" href="/register" id="navRegister">Реєстрація</a>
+      <button class="nav-link" id="navLogout" style="display:none; background:none; border:none; cursor:pointer">Вийти
+      </button>
+    </div>
+  </nav>
+
+  <header>
+    <div class="brand">
+      <div class="logo">💼</div>
+      <div>
+        <h1>Портфелі</h1>
+        <p class="lead">Керуйте своїми портфелями.</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn secondary" id="refreshBtn">Оновити</button>
+      <button class="btn" id="openCreate">Додати портфель</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="itemsSection">
+      <div class="grid" id="itemsGrid">
+        <!-- Cards injected here -->
+      </div>
+      <div class="empty" id="emptyState" style="display:none">Список порожній. Додайте свій перший портфель.</div>
+    </section>
+
+    <footer>Powered by FastAPI & Nginx • Light UI</footer>
+  </main>
+</div>
+
+<!-- floating action button -->
+<button aria-label="Create item" class="fab" id="fabCreate">＋</button>
+
+<!-- modal -->
+<div class="overlay" id="overlay">
+  <div aria-labelledby="modalTitle" aria-modal="true" class="modal" role="dialog">
+    <h2 id="modalTitle">Додайте новий портфель</h2>
+    <div class="field">
+      <label for="name">Назва</label>
+      <input id="name" name="name" placeholder="Назва портфеля" type="text"/>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" id="closeModal">Відмінити</button>
+      <button class="btn" id="submitCreate">Створити</button>
+    </div>
+  </div>
+</div>
+
+<script src="script/auth.js"></script>
+<script src="script/portfolio.js"></script>
+</body>
+</html>

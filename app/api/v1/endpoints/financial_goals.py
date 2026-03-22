@@ -1,7 +1,9 @@
 from fastapi import APIRouter
+
 from app.utils.helpers import log_request
 
 router = APIRouter()
+
 
 @log_request
 @router.get("/", status_code=200)
@@ -27,8 +29,13 @@ async def calculate_investment_history(
     :param contribution_growth: Annual growth rate for the monthly contribution (e.g., 0.03 for 3%)
     :param tax_rate: Tax rate applied to the profit (e.g., 0.18 for 18%)
     :param annual_inflation: Annual inflation rate used for discounting the net balance (e.g., 0.03 for 3%)
-    :return:
-
+    :return: A list of dictionaries, each containing:
+             - month: The month number (1 to total months)
+             - label: A label for the month (e.g., "Рік 1" for every 12 months)
+             - invested: Total amount invested up to that month
+             - total_balance: Total balance in the account at the end of that month
+             - profit: Total profit (total balance - total invested) at the end of that month
+             - real_value: The net balance discounted for inflation to get the "Real Value" at the end of that month
     """
     monthly_rate = annual_return / 12
     total_months = years * 12

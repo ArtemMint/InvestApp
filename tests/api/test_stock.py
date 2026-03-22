@@ -4,6 +4,7 @@ Tests for stock API endpoints: /api/v1/stock/
 Uses unittest.mock to patch yfinance so tests run without network access.
 """
 from unittest.mock import patch, MagicMock
+
 import pandas as pd
 
 STOCK_API = "/api/v1/stock"

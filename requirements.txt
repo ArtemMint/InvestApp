@@ -5,4 +5,9 @@ SQLAlchemy==2.0.45
 psycopg2-binary==2.9.10
 python-dotenv
 yfinance==1.2.0
+python-jose[cryptography]
+passlib[argon2]==1.7.4
+argon2-cffi
+pandas
+numpy
 # add requests for making HTTP requests to the OpenAI API
