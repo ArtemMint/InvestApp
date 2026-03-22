@@ -1,11 +1,16 @@
 import uuid
 from datetime import datetime
 from decimal import Decimal
+from typing import TYPE_CHECKING
 
 from sqlalchemy import ForeignKey, Numeric, DateTime, func, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
+
+if TYPE_CHECKING:
+    from app.models.portfolio import Portfolio  # Import for type checking to avoid circular imports
+    from app.models.asset import Asset  # Import for type checking to avoid circular imports
 
 
 class Position(Base):

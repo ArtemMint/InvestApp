@@ -1,13 +1,14 @@
 import enum
 import uuid
-from typing import List
-from typing import Optional
+from typing import List, Optional, TYPE_CHECKING
 
 from sqlalchemy import String, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
-from app.models.positions import Position
+
+if TYPE_CHECKING:
+    from app.models.positions import Position  # Import for type checking to avoid circular imports
 
 
 class AssetType(str, enum.Enum):

@@ -1,11 +1,16 @@
 import uuid
 from datetime import datetime
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from sqlalchemy import ForeignKey, String, Boolean, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
+
+if TYPE_CHECKING:
+    from app.models.user import User  # Import for type checking to avoid circular imports
+    from app.models.positions import Position  # Import for type checking to avoid circular imports
+    from app.models.transaction import Transaction  # Import for type checking to avoid circular imports
 
 
 class Portfolio(Base):

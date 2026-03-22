@@ -1,12 +1,14 @@
 import uuid
 from datetime import datetime
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from sqlalchemy import String, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
 
+if TYPE_CHECKING:
+    from app.models.portfolio import Portfolio  # Import for type checking to avoid circular imports
 
 class User(Base):
     """
