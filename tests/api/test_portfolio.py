@@ -229,7 +229,7 @@ class TestPortfolioAPI:
             expected_price_per_share=expected_price_per_share)
 
     @pytest.mark.portfolio
-    def test_read_transactions_for_portfolio_return_404(self, client):
+    def test_read_transactions_for_portfolio_return_404(self, client, persisted_user):
         """Test read transactions for portfolio return 404."""
         portfolio_id = "6ec0bd7f-11c0-43da-975e-2a8ad9ebae0b"
 
