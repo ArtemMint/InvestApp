@@ -2,13 +2,14 @@ import enum
 import uuid
 from typing import List, Optional, TYPE_CHECKING
 
-from sqlalchemy import String, Enum
+from sqlalchemy import String, Enum, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
     from app.models.positions import Position  # Import for type checking to avoid circular imports
+    from app.models.sector import Sector  # Import for type checking to avoid circular imports
 
 
 class AssetType(str, enum.Enum):
@@ -32,8 +33,9 @@ class Asset(Base):
         ticker (str): Unique ticker symbol for the asset (e.g., AAPL, BTC).
         name (str): Name of the asset (e.g., Apple Inc., Bitcoin).
         asset_type (AssetType): Type of the asset (e.g., STOCK, CRYPTO, BOND, ETF).
-        sector (Optional[str]): Optional sector classification for the asset (e.g., technology, healthcare).
         positions (List[Position]): List of positions associated with this asset.
+        sector_id (Optional[int]): Optional sector classification for the asset.
+        sector (Optional[Sector]): Optional sector object for asset (e.g., technology, healthcare).
     """
     __tablename__ = "assets"
 
@@ -41,7 +43,8 @@ class Asset(Base):
     ticker: Mapped[str] = mapped_column(String(20), unique=True, index=True, nullable=False)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     asset_type: Mapped[AssetType] = mapped_column(Enum(AssetType), nullable=False)
-    sector: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
 
     # Connection to positions and transactions.
     positions: Mapped[List["Position"]] = relationship(back_populates="asset")
+    sector_id: Mapped[Optional[int]] = mapped_column(ForeignKey("sectors.id"), nullable=True)
+    sector: Mapped[Optional["Sector"]] = relationship(back_populates="assets")

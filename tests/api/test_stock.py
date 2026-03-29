@@ -6,6 +6,7 @@ Uses unittest.mock to patch yfinance so tests run without network access.
 from unittest.mock import patch, MagicMock
 
 import pandas as pd
+import pytest
 
 STOCK_API = "/api/v1/stock"
 
@@ -34,6 +35,7 @@ def _make_ohlcv_dataframe(rows: int = 3) -> pd.DataFrame:
 class TestGetStockData:
     """Tests for the GET /api/v1/stock/ endpoint."""
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.download")
     def test_default_params_returns_200(self, mock_download, client):
         """Default request should return 200 with ticker, period, interval, and data."""
@@ -49,6 +51,7 @@ class TestGetStockData:
         assert isinstance(body["data"], list)
         assert len(body["data"]) == 3
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.download")
     def test_custom_params(self, mock_download, client):
         """Custom query parameters should be forwarded correctly."""
@@ -71,6 +74,7 @@ class TestGetStockData:
             "MSFT", period="5d", interval="1d", progress=False,
         )
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.download")
     def test_candlestick_data_structure(self, mock_download, client):
         """Each data point must contain time, OHLC, and volume fields."""
@@ -85,6 +89,7 @@ class TestGetStockData:
         assert isinstance(point["open"], float)
         assert isinstance(point["volume"], int)
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.download")
     def test_empty_dataframe_returns_error(self, mock_download, client):
         """An empty DataFrame (invalid ticker) should return an error message."""
@@ -100,6 +105,7 @@ class TestGetStockData:
         assert "error" in body
         assert body["data"] == []
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.download")
     def test_yfinance_exception_returns_error(self, mock_download, client):
         """If yfinance raises, endpoint should catch and return an error payload."""
@@ -121,6 +127,7 @@ class TestGetStockData:
 class TestGetRecommendations:
     """Tests for the GET /api/v1/stock/recommendations endpoint."""
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.Ticker")
     def test_recommendations_returns_200(self, mock_ticker_cls, client):
         mock_ticker = MagicMock()
@@ -144,6 +151,7 @@ class TestGetRecommendations:
         assert body["strongBuy"] == 12
         assert body["buy"] == 48
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.Ticker")
     def test_recommendations_data_structure(self, mock_ticker_cls, client):
         expected_keys = {"period", "strongBuy", "buy", "hold", "sell", "strongSell"}
@@ -169,6 +177,7 @@ class TestGetRecommendations:
 class TestGetPriceTarget:
     """Tests for the GET /api/v1/stock/price_target endpoint."""
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.Ticker")
     def test_price_target_returns_200(self, mock_ticker_cls, client):
         mock_ticker = MagicMock()
@@ -191,6 +200,7 @@ class TestGetPriceTarget:
         assert body["current"] == 304.82
         assert body["high"] == 405.0
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.Ticker")
     def test_price_target_data_structure(self, mock_ticker_cls, client):
         expected_keys = {"current", "high", "low", "mean", "median"}
@@ -216,6 +226,7 @@ class TestGetPriceTarget:
 class TestGetEarningsHistory:
     """Tests for the GET /api/v1/stock/earnings_history endpoint."""
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.Ticker")
     def test_earnings_history_returns_200(self, mock_ticker_cls, client):
         mock_ticker = MagicMock()
@@ -236,6 +247,7 @@ class TestGetEarningsHistory:
         body = response.json()
         assert "epsActual" in body
 
+    @pytest.mark.stock
     @patch("app.api.v1.endpoints.stock.yf.Ticker")
     def test_earnings_history_data_structure(self, mock_ticker_cls, client):
         expected_keys = {"epsActual", "epsEstimate", "epsDifference", "surprisePercent"}

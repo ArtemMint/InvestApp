@@ -38,7 +38,7 @@
         const password = document.getElementById('password').value.trim();
         if (!email || !password) return document.getElementById('msg').textContent = 'Введіть email та пароль';
         const res = await authUI.registerUI(email, password);
-        if (!res.ok) return document.getElementById('msg').textContent = 'Помилка реєстрації: ' + res.status;
+        if (!res.ok) return document.getElementById('msg').textContent = 'Помилка реєстрації: ' + res.status + res.statusText;
         // auto-login after register
         const login = await authUI.loginUI(email, password);
         if (login.ok) {

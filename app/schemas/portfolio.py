@@ -17,7 +17,6 @@ class PortfolioCreate(PortfolioBase):
 class PortfolioUpdate(BaseModel):
     name: str | None = Field(None, min_length=1, max_length=100)
     currency: str | None = Field(None, max_length=3)
-    updated_at: datetime | None = Field(default_factory=datetime.now)
 
 
 class PortfolioResponse(PortfolioBase):

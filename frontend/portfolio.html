@@ -33,7 +33,6 @@
         <p class="lead">Керуйте своїми портфелями.</p>
       </div>
     </div>
-
     <div class="controls">
       <button class="btn secondary" id="refreshBtn">Оновити</button>
       <button class="btn" id="openCreate">Додати портфель</button>
@@ -42,30 +41,124 @@
 
   <main>
     <section id="itemsSection">
-      <div class="grid" id="itemsGrid">
-        <!-- Cards injected here -->
-      </div>
+      <div class="grid" id="itemsGrid"></div>
       <div class="empty" id="emptyState" style="display:none">Список порожній. Додайте свій перший портфель.</div>
     </section>
-
     <footer>Powered by FastAPI & Nginx • Light UI</footer>
   </main>
 </div>
 
-<!-- floating action button -->
+<!-- FAB -->
 <button aria-label="Create item" class="fab" id="fabCreate">＋</button>
 
-<!-- modal -->
-<div class="overlay" id="overlay">
+<!-- ══ Modal: Create portfolio ══════════════════════════════════ -->
+<div class="overlay" id="overlayCreate">
   <div aria-labelledby="modalTitle" aria-modal="true" class="modal" role="dialog">
     <h2 id="modalTitle">Додайте новий портфель</h2>
     <div class="field">
       <label for="name">Назва</label>
       <input id="name" name="name" placeholder="Назва портфеля" type="text"/>
     </div>
+    <div class="field">
+      <label for="currency">Валюта</label>
+      <input id="currency" maxlength="3" name="currency" placeholder="USD" type="text"/>
+    </div>
     <div class="actions">
       <button class="btn secondary" id="closeModal">Відмінити</button>
       <button class="btn" id="submitCreate">Створити</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Modal: Update portfolio ══════════════════════════════════ -->
+<div class="overlay" id="overlayUpdate">
+  <div aria-labelledby="modalTitleUpdate" aria-modal="true" class="modal" role="dialog">
+    <h2 id="modalTitleUpdate">Оновіть портфель</h2>
+    <div class="field">
+      <label for="nameUpdate">Назва</label>
+      <input id="nameUpdate" name="name" placeholder="Назва портфеля" type="text"/>
+    </div>
+    <div class="field">
+      <label for="currencyUpdate">Валюта</label>
+      <input id="currencyUpdate" maxlength="3" name="currency" placeholder="USD" type="text"/>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" id="closeModalUpdate">Відмінити</button>
+      <button class="btn" id="submitUpdate">Оновити</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Drawer: Positions ════════════════════════════════════════ -->
+<div class="drawer-overlay" id="drawerOverlay">
+  <div aria-labelledby="drawerTitle" aria-modal="true" class="drawer" role="dialog">
+
+    <div class="drawer-header">
+      <h2 id="drawerTitle">Позиції портфеля</h2>
+      <button aria-label="Закрити" class="drawer-close" id="drawerClose">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Positions list -->
+      <div id="positionsContent">
+        <p class="pos-empty">Завантаження...</p>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn secondary" id="drawerCloseBtn">Закрити</button>
+      <button class="btn" id="openAddAsset">＋ Додати актив</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Modal: Add asset to portfolio ════════════════════════════ -->
+<div class="overlay" id="overlayAddAsset">
+  <div aria-modal="true" class="modal" role="dialog">
+    <h2>Додати актив до портфеля</h2>
+    <div class="field">
+      <label for="assetTicker">Тікер</label>
+      <input id="assetTicker" placeholder="напр. AAPL" style="text-transform:uppercase" type="text"/>
+    </div>
+    <div class="field">
+      <label for="assetQty">Кількість</label>
+      <input id="assetQty" min="0" placeholder="10" step="any" type="number"/>
+    </div>
+    <div class="field">
+      <label for="assetPrice">Ціна за одиницю</label>
+      <input id="assetPrice" min="0" placeholder="150.00" step="any" type="number"/>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" id="closeAddAsset">Відмінити</button>
+      <button class="btn" id="submitAddAsset">Додати</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Modal: Edit position ══════════════════════════════════════ -->
+<div class="overlay" id="overlayEditPosition">
+  <div aria-modal="true" class="modal" role="dialog">
+    <h2>Оновити позицію</h2>
+    <p id="editPositionMeta" style="margin:0 0 1rem; opacity:.6; font-size:.9rem;"></p>
+    <div class="field">
+      <label for="editTicker">Тікер</label>
+      <input id="editTicker" readonly style="text-transform:uppercase" style="opacity:.6; cursor:not-allowed;"
+             type="text"/>
+    </div>
+    <div class="field">
+      <label for="editQty">Додаткова кількість</label>
+      <input id="editQty" min="0" placeholder="5" step="any" type="number"/>
+    </div>
+    <div class="field">
+      <label for="editPrice">Ціна за одиницю</label>
+      <input id="editPrice" min="0" placeholder="155.00" step="any" type="number"/>
+    </div>
+    <p style="font-size:.82rem; opacity:.55; margin:.25rem 0 0;">
+      Нова транзакція BUY буде додана, а середня ціна перераховується автоматично.
+    </p>
+    <div class="actions">
+      <button class="btn secondary" id="closeEditPosition">Відмінити</button>
+      <button class="btn" id="submitEditPosition">Зберегти</button>
     </div>
   </div>
 </div>

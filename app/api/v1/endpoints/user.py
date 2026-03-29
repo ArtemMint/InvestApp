@@ -15,6 +15,23 @@ router = APIRouter()
 
 
 @log_request
+@router.get("/users/me", response_model=UserResponse, status_code=status.HTTP_200_OK)
+async def read_current_user(
+        current_user=Depends(get_current_user)
+) -> UserResponse:
+    """
+    Get the currently authenticated user's information. Requires a valid access token.
+
+    :param current_user: Injected by get_current_user dependency, which retrieves user info from the access token.
+                         Raises HTTPException if not authenticated.
+    :return: Current user's information. Raises HTTPException if user is not authenticated.
+    """
+    if not current_user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
+    return UserResponse.model_validate(current_user)
+
+
+@log_request
 @router.get("/{email}", response_model=UserResponse, status_code=status.HTTP_200_OK)
 async def get_user(
         email: str,
@@ -135,20 +152,3 @@ async def remove_user(
     """
     delete_user(db, email=email)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-
-@log_request
-@router.get("/me", response_model=UserResponse, status_code=status.HTTP_200_OK)
-async def read_current_user(
-        current_user=Depends(get_current_user)
-) -> UserResponse:
-    """
-    Get the currently authenticated user's information. Requires a valid access token.
-
-    :param current_user: Injected by get_current_user dependency, which retrieves user info from the access token.
-                         Raises HTTPException if not authenticated.
-    :return: Current user's information. Raises HTTPException if user is not authenticated.
-    """
-    if not current_user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
-    return UserResponse.model_validate(current_user)
