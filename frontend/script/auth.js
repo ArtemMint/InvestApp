@@ -9,7 +9,8 @@ async function apiFetch(path, options = {}) {
         // try to clear cookie on server side
         try {
             await fetch(`${authApi}/logout`, {method: 'POST', credentials: 'include'});
-        } catch (_) {}
+        } catch (_) {
+        }
         // clear local storage and redirect to login
         clearToken();
         localStorage.removeItem('auth_user');
@@ -38,9 +39,13 @@ function getToken() {
 }
 
 async function registerUI(email, password) {
-    // keep previous register behavior (returns created user)
-    const res = await apiFetch(`${authApi}/register?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
-        method: 'POST'
+    const res = await apiFetch(`${authApi}/register`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            email: email,    // Переконайтеся, що назви полів
+            password: password // збігаються з моделлю UserRegister
+        })
     });
     return res;
 }
@@ -87,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLogout.addEventListener('click', async () => {
             // call backend to clear cookie
             try {
-                                await apiFetch(`${authApi}/logout`, {method: 'POST'});
+                await apiFetch(`${authApi}/logout`, {method: 'POST'});
             } catch (_) {
             }
             clearToken();

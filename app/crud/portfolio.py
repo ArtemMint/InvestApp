@@ -4,9 +4,9 @@ Each function is decorated with a timing helper to measure execution time for pe
 """
 import uuid
 
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
-from app.models import Portfolio, User
+from app.models import Portfolio
 from app.schemas import PortfolioCreate, PortfolioUpdate
 from app.utils.helpers import timing
 
@@ -14,7 +14,7 @@ from app.utils.helpers import timing
 @timing
 def get_portfolio_for_user(db: Session, portfolio_id: uuid.UUID = None, user_id: uuid.UUID = None):
     """Retrieve a single portfolio by its ID."""
-    return db.query(Portfolio).filter(Portfolio.id == portfolio_id, User.id == user_id).first()
+    return db.query(Portfolio).options(joinedload(Portfolio.user)).filter(Portfolio.id == portfolio_id).first()
 
 
 @timing

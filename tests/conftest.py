@@ -1,8 +1,13 @@
 import os
 from datetime import timedelta
+from decimal import Decimal
 
 from app.core.auth import create_access_token
 from app.crud import create_user, create_portfolio
+from app.crud.asset import create_asset
+from app.models import Asset, Position, Transaction
+from app.models.asset import AssetType
+from app.models.transaction import TransactionType
 from app.schemas import PortfolioCreate, UserRegister
 
 # ---------------------------------------------------------------------------
@@ -114,3 +119,59 @@ def persisted_portfolio(db_session, persisted_user):
     db_session.commit()
     db_session.refresh(portfolio)
     return portfolio
+
+
+@pytest.fixture
+def portfolio_with_assets(db_session, persisted_portfolio):
+    """
+    Фікстура, яка бере існуючий портфель і наповнює його
+    тестовим активом (NVDA), позицією та транзакцією.
+    """
+    # 1. Create asset
+    asset = Asset(
+        ticker="NVDA",
+        name="Nvidia Corp",
+        asset_type=AssetType.STOCK
+    )
+    db_session.add(asset)
+    db_session.flush()  # Getting asset.id
+
+    # 2. Create positions
+    position = Position(
+        portfolio_id=persisted_portfolio.id,
+        asset_id=asset.id,
+        quantity=Decimal('10.0'),
+        average_buy_price=Decimal('100.0')
+    )
+    db_session.add(position)
+
+    # 3. Create transaction
+    transaction = Transaction(
+        portfolio_id=persisted_portfolio.id,
+        asset_id=asset.id,
+        type=TransactionType.BUY,
+        quantity=Decimal('10.0'),
+        price_per_share=Decimal('100.0')
+    )
+    db_session.add(transaction)
+
+    # Commit the DB
+    db_session.commit()
+
+    return {
+        "portfolio": persisted_portfolio,
+        "asset": asset,
+        "position": position,
+        "transaction": transaction
+    }
+
+
+@pytest.fixture
+def persisted_asset(db_session):
+    db_asset = create_asset(
+        db=db_session,
+        ticker="GOOG",
+        name="Google",
+        asset_type=AssetType.STOCK,
+    )
+    return db_asset
