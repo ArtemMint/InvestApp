@@ -236,4 +236,4 @@ class TestPortfolioAPI:
         response = client.get(f"{PORTFOLIO_API}/{portfolio_id}/transactions")
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
-        assert response.json()["detail"] == "Transaction not found"
+        assert response.json()["detail"] == "Portfolio not found"
