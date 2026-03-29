@@ -17,7 +17,7 @@ api_router.include_router(portfolio.router, prefix="/portfolio", tags=["portfoli
 api_router.include_router(financial_goals.router, prefix="/financial_goals", tags=["financial_goals"])
 
 # Include the asset router with the prefix "/assets" so endpoints are under /api/v1/assets
-api_router.include_router(assets.router, prefix="/assets", tags=["assets"])
+api_router.include_router(asset.router, prefix="/assets", tags=["assets"])
 
 # Include the transaction router with the prefix "/transactions" so endpoints are under /api/v1/transaction
 api_router.include_router(transaction.router, prefix="/transactions", tags=["transactions"])
